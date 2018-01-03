@@ -16,6 +16,7 @@ public class InzV10 extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/FoldersTab.fxml"));
         
         Scene scene = new Scene(root);
         

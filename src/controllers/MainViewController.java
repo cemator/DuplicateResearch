@@ -56,14 +56,16 @@ public class MainViewController implements Initializable {
     
     @FXML private Button selectFolderButtom;
 
+//    
+//    @FXML private TableView<Node> duplicateFolderTableView;
+//    @FXML private TableColumn<Node, Boolean> selectedFoldersColumn;
+//    @FXML private TableColumn<Node, Number> sizeFoldersColumn;
+//    @FXML private TableColumn<Node, Number> itemsFoldersColumn;
+//    @FXML private TableColumn<Node, String> pathFoldersColumn;
+//    ObservableList<Node> ObservableFolderList = FXCollections.observableArrayList();
+//    
     
-    @FXML private TableView<Node> duplicateFolderTableView;
-    @FXML private TableColumn<Node, Boolean> selectedFoldersColumn;
-    @FXML private TableColumn<Node, Number> sizeFoldersColumn;
-    @FXML private TableColumn<Node, Number> itemsFoldersColumn;
-    @FXML private TableColumn<Node, String> pathFoldersColumn;
-    ObservableList<Node> ObservableFolderList = FXCollections.observableArrayList();
-    
+    @FXML FoldersTabController foldersTabController;// = new FoldersTabController();
     // tabela duplicate file
     
     
@@ -116,10 +118,12 @@ public class MainViewController implements Initializable {
         
     }
 
+///   To Rebulit
     
     public void SetDuplicateFolderTable(java.util.List<Node> listaObiektow){
-        ObservableFolderList.addAll(listaObiektow); //tabelka
-        duplicateFolderTableView.itemsProperty().setValue(ObservableFolderList);
+          foldersTabController.SetDuplicateFolderTable(listaObiektow);
+//        ObservableFolderList.addAll(listaObiektow); //tabelka
+//        duplicateFolderTableView.itemsProperty().setValue(ObservableFolderList);
     }
     
     public void SetDuplicateFileTable(java.util.List<Node> listaObiektow){
@@ -128,8 +132,10 @@ public class MainViewController implements Initializable {
     }
     
     public void clearTables(){
-        ObservableFolderList.clear();
-        duplicateFolderTableView.itemsProperty().setValue(ObservableFolderList);
+//        ObservableFolderList.clear();
+//        duplicateFolderTableView.itemsProperty().setValue(ObservableFolderList);
+        foldersTabController.clearTable();
+        
         ObservableFileList.clear(); //tabelka
         duplicateFileTableView.itemsProperty().setValue(ObservableFileList);
               
@@ -274,7 +280,8 @@ public class MainViewController implements Initializable {
         final Set<Node> delFolder = new HashSet<>();
 
         List<Node> pomocniczaFolder = new ArrayList<>(); 
-        pomocniczaFolder = duplicateFolderTableView.getItems();
+        pomocniczaFolder = foldersTabController.getObservableFolderList();
+   //     pomocniczaFolder = duplicateFolderTableView.getItems();
         
         
         for(Node nod : pomocniczaFolder) 
@@ -301,12 +308,16 @@ public class MainViewController implements Initializable {
                nod.getFile().delete();
             }
             duplicateFileTableView.getItems().removeAll( delFile );
-            duplicateFolderTableView.getItems().removeAll( delFolder );
+            
+            //duplicateFolderTableView.getItems().removeAll( delFolder );
+            foldersTabController.getObservableFolderList().removeAll( delFolder );
             
             ////refresh tables
             
             duplicateFileTableView.refresh();
-            duplicateFolderTableView.refresh();
+            
+//            duplicateFolderTableView.refresh();
+            foldersTabController.getDuplicateFolderTableView().refresh();
             
             
         } else {
@@ -320,16 +331,16 @@ public class MainViewController implements Initializable {
       
         //bindowanie tabelki foldersList
         
-        duplicateFolderTableView.setEditable(true);
-        selectedFoldersColumn.setCellValueFactory(p -> p.getValue().selectedProperty());
-        sizeFoldersColumn.setCellValueFactory(p -> p.getValue().sizeProperty());     
-        itemsFoldersColumn.setCellValueFactory(p -> p.getValue().numTotalChildrenProperty());
-        pathFoldersColumn.setCellValueFactory(p -> p.getValue().pathProperty());
+//        duplicateFolderTableView.setEditable(true);
+//        selectedFoldersColumn.setCellValueFactory(p -> p.getValue().selectedProperty());
+//        sizeFoldersColumn.setCellValueFactory(p -> p.getValue().sizeProperty());     
+//        itemsFoldersColumn.setCellValueFactory(p -> p.getValue().numTotalChildrenProperty());
+//        pathFoldersColumn.setCellValueFactory(p -> p.getValue().pathProperty());
         
         
-        CheckBoxTableCell box = new CheckBoxTableCell(); 
-        selectedFoldersColumn.setCellFactory(box.forTableColumn(selectedFoldersColumn));
-        selectedFoldersColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
+//        CheckBoxTableCell box = new CheckBoxTableCell(); 
+//        selectedFoldersColumn.setCellFactory(box.forTableColumn(selectedFoldersColumn));
+//        selectedFoldersColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
         
         
         
@@ -403,58 +414,58 @@ public class MainViewController implements Initializable {
          
         });
         
-        duplicateFolderTableView.setRowFactory(x -> new TableRow<Node>() {
-            @Override
-            public void updateItem(Node item, boolean empty) {
-                super.updateItem(item, empty) ;
-                if(item != null)
-                {
-                switch(item.getGroupFolder()%10){
-                        case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
-                            setStyle("-fx-background-color: lightblue;"); //rgb(140,0,0);"); 
-                            break;
-                        }
-                        case 1: { 
-                            setStyle("-fx-background-color: lightcoral;"); 
-                            break;
-                        }
-                        case 2: { 
-                            setStyle("-fx-background-color: lightcyan;"); 
-                            break;
-                        }
-                        case 3: { 
-                            setStyle("-fx-background-color: lightgoldenrodyellow;"); 
-                            break;
-                        }
-                        case 4: { 
-                            setStyle("-fx-background-color: lightgray;"); 
-                            break;
-                        }
-                        case 5: { 
-                            setStyle("-fx-background-color: lightgreen;"); 
-                            break;
-                        }
-                        case 6: { 
-                            setStyle("-fx-background-color: lightgrey;"); 
-                            break;
-                        }
-                        case 7: { 
-                            setStyle("-fx-background-color: lightpink;"); 
-                            break;
-                        }
-                        case 8: { 
-                            setStyle("-fx-background-color: lightsalmon;"); 
-                            break;
-                        }
-                        case 9: {                          
-                            setStyle("-fx-background-color: lightseagreen;"); 
-                            break;
-                        }
-                    }
-                }
-                
-            }
-        });
+//        duplicateFolderTableView.setRowFactory(x -> new TableRow<Node>() {
+//            @Override
+//            public void updateItem(Node item, boolean empty) {
+//                super.updateItem(item, empty) ;
+//                if(item != null)
+//                {
+//                switch(item.getGroupFolder()%10){
+//                        case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
+//                            setStyle("-fx-background-color: lightblue;"); //rgb(140,0,0);"); 
+//                            break;
+//                        }
+//                        case 1: { 
+//                            setStyle("-fx-background-color: lightcoral;"); 
+//                            break;
+//                        }
+//                        case 2: { 
+//                            setStyle("-fx-background-color: lightcyan;"); 
+//                            break;
+//                        }
+//                        case 3: { 
+//                            setStyle("-fx-background-color: lightgoldenrodyellow;"); 
+//                            break;
+//                        }
+//                        case 4: { 
+//                            setStyle("-fx-background-color: lightgray;"); 
+//                            break;
+//                        }
+//                        case 5: { 
+//                            setStyle("-fx-background-color: lightgreen;"); 
+//                            break;
+//                        }
+//                        case 6: { 
+//                            setStyle("-fx-background-color: lightgrey;"); 
+//                            break;
+//                        }
+//                        case 7: { 
+//                            setStyle("-fx-background-color: lightpink;"); 
+//                            break;
+//                        }
+//                        case 8: { 
+//                            setStyle("-fx-background-color: lightsalmon;"); 
+//                            break;
+//                        }
+//                        case 9: {                          
+//                            setStyle("-fx-background-color: lightseagreen;"); 
+//                            break;
+//                        }
+//                    }
+//                }
+//                
+//            }
+//        });
         
         /////////////////////////////
         
@@ -488,6 +499,9 @@ public class MainViewController implements Initializable {
             }
         });
      
+         
+       
+        
     }    
 
     public CheckBox getSelectedBoxSelectedView() {

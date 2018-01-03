@@ -28,14 +28,11 @@
         <tabs>
           <Tab text="Folders">
                <content>
-                  <TableView fx:id="duplicateFolderTableView" prefHeight="567.0" prefWidth="604.0">
-                    <columns>
-                      <TableColumn fx:id="selectedFoldersColumn" prefWidth="37.0" sortable="false" text="Selected" />
-                      <TableColumn fx:id="sizeFoldersColumn" prefWidth="64.0" text="Size" />
-                        <TableColumn fx:id="itemsFoldersColumn" minWidth="0.0" prefWidth="36.0" sortable="false" text="Items" />
-                        <TableColumn fx:id="pathFoldersColumn" prefWidth="520.0" sortable="false" text="Path" />
-                    </columns>
-                  </TableView>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <fx:include source="FoldersTab.fxml" fx:id="foldersTab"/>
+                     </children>
+                  </AnchorPane>
                </content>
           </Tab>
           <Tab text="Files">
