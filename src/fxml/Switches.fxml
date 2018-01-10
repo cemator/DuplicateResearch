@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="108.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SwitchesController">
+   <children>
+      <Button fx:id="selectFolderButtom" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectFolderButtomAction" text="Wybierz Folder" />
+      <Slider fx:id="zoomSlider" accessibleText="Wielkosc Wykresu" blockIncrement="0.1" layoutX="142.0" layoutY="8.0" majorTickUnit="0.5" max="3.0" min="0.1" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="layerSlider" blockIncrement="1.0" layoutX="142.0" layoutY="52.0" majorTickUnit="5.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
+      <RadioButton id="rozszerzenia" fx:id="radioRozszerzenia" layoutX="335.0" layoutY="31.0" mnemonicParsing="false" onAction="#RadioRozszerzeniaAction" text="Rozszerzenia">
+         <toggleGroup>
+            <ToggleGroup fx:id="ColorStrategy" />
+         </toggleGroup>
+      </RadioButton>
+      <Button fx:id="deleteButton" layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="25.0" prefWidth="96.0" text="Usun" />
+      <RadioButton fx:id="radioShadow" layoutX="335.0" layoutY="6.0" mnemonicParsing="false" onAction="#RadioShadowAction" selected="true" text="Shadow" toggleGroup="$ColorStrategy" />
+      <RadioButton fx:id="radioGroupColored" layoutX="334.0" layoutY="54.0" mnemonicParsing="false" onAction="#RadioGroupColoredAction" text="GroupColored" toggleGroup="$ColorStrategy" />
+      <RadioButton fx:id="radioHighContrast" layoutX="334.0" layoutY="75.0" mnemonicParsing="false" onAction="#RadioHighContrastAction" text="HighContrast" toggleGroup="$ColorStrategy" />
+      <CheckBox fx:id="SelectedBoxSelectedView" layoutX="464.0" layoutY="18.0" mnemonicParsing="false" text="SelectedView" />
+   </children>
+</AnchorPane>

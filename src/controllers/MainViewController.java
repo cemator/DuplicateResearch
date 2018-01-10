@@ -51,48 +51,35 @@ public class MainViewController implements Initializable {
     private RingProgressIndicator indicator = new RingProgressIndicator();
     private BadanieDuplikatow badanieDuplikatow;
     
-    private ColorStrategyDuplicateRed colorStrategyDuplicateRed = new ColorStrategyDuplicateRed();
-    
-    
-    @FXML private Button selectFolderButtom;
+//    private ColorStrategyDuplicateRed colorStrategyDuplicateRed = new ColorStrategyDuplicateRed();
+//    
+//    
+//    @FXML private Button selectFolderButtom;
 
-//    
-//    @FXML private TableView<Node> duplicateFolderTableView;
-//    @FXML private TableColumn<Node, Boolean> selectedFoldersColumn;
-//    @FXML private TableColumn<Node, Number> sizeFoldersColumn;
-//    @FXML private TableColumn<Node, Number> itemsFoldersColumn;
-//    @FXML private TableColumn<Node, String> pathFoldersColumn;
-//    ObservableList<Node> ObservableFolderList = FXCollections.observableArrayList();
-//    
+
     
-    @FXML FoldersTabController foldersTabController;// = new FoldersTabController();
-    // tabela duplicate file
+    @FXML FoldersTabController foldersTabController;
+    @FXML FileTabController fileTabController;
+    @FXML SwitchesController switchesController;
     
-    
-    @FXML private TableView<Node> duplicateFileTableView;
-    @FXML private TableColumn<Node, Boolean> selectedFileColumn;
-    @FXML private TableColumn<Node, Number> sizeFileColumn;
-    @FXML private TableColumn<Node, String> folderFileColumn;
-    ObservableList<Node> ObservableFileList = FXCollections.observableArrayList();
-    
-    ////
+  
     
     @FXML private BorderPane pane;
+  ///////////////// switches  
+//    @FXML private Slider zoomSlider;
+//    @FXML private Slider layerSlider;
+//    @FXML private RadioButton radioRozszerzenia;
+//    
+//    
+//    @FXML private RadioButton radioShadow;
+//    @FXML private RadioButton RadioGroup;
+//    @FXML private RadioButton RadioSelected;
+//    
+//    @FXML private CheckBox SelectedBoxSelectedView;
+//    @FXML private ToggleGroup ColorStrategy;
+///////////////// /switches
     
-    @FXML private Slider zoomSlider;
-    @FXML private Slider layerSlider;
-    @FXML private RadioButton radioRozszerzenia;
-    
-    
-    @FXML private RadioButton radioShadow;
-    @FXML private RadioButton RadioGroup;
-    @FXML private RadioButton RadioSelected;
-    
-    @FXML private CheckBox SelectedBoxSelectedView;
-    @FXML private ToggleGroup ColorStrategy;
-
-    
-    private File seletedDirectory;
+//    private File seletedDirectory;
     private WeightedTreeItem<Node> drzewo;
     private SunburstView sunburstView = new SunburstView();
     private Thread sunburstRefresherThread;
@@ -101,21 +88,29 @@ public class MainViewController implements Initializable {
     
     @FXML
     private void selectFolderButtomAction(ActionEvent event) throws IOException {
-        DirectoryChooser fd = new DirectoryChooser();
-        seletedDirectory = fd.showDialog(null);
-
-        if(seletedDirectory != null){
-            clearTables();
-  
-            this.badanieDuplikatow = new BadanieDuplikatow(seletedDirectory.getAbsolutePath(),this);
-            new Thread(badanieDuplikatow).start();
-                       
-
-        }
-        else{
-            System.out.println("Niema takiego Folderu");
-        }
+//        DirectoryChooser fd = new DirectoryChooser();
+//        seletedDirectory = fd.showDialog(null);
+//
+//        if(seletedDirectory != null){
+//            clearTables();
+//  
+//            this.badanieDuplikatow = new BadanieDuplikatow(seletedDirectory.getAbsolutePath(),this);
+//            new Thread(badanieDuplikatow).start();
+//                       
+//
+//        }
+//        else{
+//            System.out.println("Niema takiego Folderu");
+//        }
         
+    }
+    
+    public void startResearch(File seletedDirectory){
+        clearTables();
+        this.badanieDuplikatow = new BadanieDuplikatow(seletedDirectory.getAbsolutePath(),this);
+        
+        switchesController.setBadanieDuplikatow(this.badanieDuplikatow);
+        new Thread(badanieDuplikatow).start();
     }
 
 ///   To Rebulit
@@ -126,18 +121,18 @@ public class MainViewController implements Initializable {
 //        duplicateFolderTableView.itemsProperty().setValue(ObservableFolderList);
     }
     
+    ///to refactor
     public void SetDuplicateFileTable(java.util.List<Node> listaObiektow){
-        ObservableFileList.addAll(listaObiektow); //tabelka
-        duplicateFileTableView.itemsProperty().setValue(ObservableFileList);
+        fileTabController.SetDuplicateFileTable(listaObiektow);
+        
+//        ObservableFileList.addAll(listaObiektow); //tabelka
+//        duplicateFileTableView.itemsProperty().setValue(ObservableFileList);
     }
     
     public void clearTables(){
-//        ObservableFolderList.clear();
-//        duplicateFolderTableView.itemsProperty().setValue(ObservableFolderList);
+
         foldersTabController.clearTable();
-        
-        ObservableFileList.clear(); //tabelka
-        duplicateFileTableView.itemsProperty().setValue(ObservableFileList);
+        fileTabController.clearTable();
               
         pane.setVisible(false);
     }
@@ -186,69 +181,70 @@ public class MainViewController implements Initializable {
     }
     
    
-    @FXML
-    private void RadioButton1Action(ActionEvent event){
-        
-        sunburstView.setColorStrategy(new ColorStrategySectorShades());
-
-        SelectedBoxSelectedView.setSelected(false);
-        SelectedBoxSelectedView.setDisable(true);
-
-       
-        radioRozszerzenia.selectedProperty().addListener((Observable observable)->{
-            if(!radioRozszerzenia.isSelected()){
-                SelectedBoxSelectedView.setDisable(false);
-                badanieDuplikatow.setSunburstDuplicate();
-            }
-        });
-        
-         badanieDuplikatow.setSunburstExtension();
-
-
-    }
-    
-    @FXML
-    void RadioGroupColoredAction(ActionEvent event) {
-        
-        if(RadioGroup.selectedProperty().getValue()){ //tutaj dodac aby przy zaznaczeniu dodawał sie proces odswierzania, a przy wylaczeniu aby sie pauzował
-            if(SelectedBoxSelectedView.isSelected()){
-                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateColored()));
-            }
-            else{
-                
-                sunburstView.setColorStrategy(new ColorStrategyDuplicateColored());
-            }
-        }
-    }
-
-    @FXML
-    void RadioSelectedAction(ActionEvent event) {
-        
-        if(RadioSelected.selectedProperty().getValue()){
-            if(SelectedBoxSelectedView.isSelected()){
-                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateRed()));
-                
-            }
-            else{
-                sunburstView.setColorStrategy(new ColorStrategyDuplicateRed());
-            
-            }
-        }
-    }
-
-    @FXML
-    void RadioShadowAction(ActionEvent event) {
-        
-        if(radioShadow.selectedProperty().getValue()){
-            if(SelectedBoxSelectedView.isSelected()){
-                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategySectorShades()));
-            }
-            else{
-                sunburstView.setColorStrategy(new ColorStrategySectorShades());
-            }
-        }
-
-    }
+//    @FXML
+//    private void RadioButton1Action(ActionEvent event){
+//        
+//        sunburstView.setColorStrategy(new ColorStrategySectorShades());
+//
+//        SelectedBoxSelectedView.setSelected(false);
+//        SelectedBoxSelectedView.setDisable(true);
+//
+//       
+//        radioRozszerzenia.selectedProperty().addListener((Observable observable)->{
+//            if(!radioRozszerzenia.isSelected()){
+//                SelectedBoxSelectedView.setDisable(false);
+//                badanieDuplikatow.setSunburstDuplicate();
+//            }
+//        });
+//        
+//         badanieDuplikatow.setSunburstExtension();
+//
+//
+//    }
+//    
+//    @FXML
+//    void RadioGroupColoredAction(ActionEvent event) {
+//        
+//        if(RadioGroup.selectedProperty().getValue()){ //tutaj dodac aby przy zaznaczeniu dodawał sie proces odswierzania, a przy wylaczeniu aby sie pauzował
+//            if(SelectedBoxSelectedView.isSelected()){
+//                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateColored()));
+//            }
+//            else{
+//                
+//                sunburstView.setColorStrategy(new ColorStrategyDuplicateColored());
+//            }
+//        }
+//        
+//    }
+//
+//    @FXML
+//    void RadioSelectedAction(ActionEvent event) {
+//        
+//        if(RadioSelected.selectedProperty().getValue()){
+//            if(SelectedBoxSelectedView.isSelected()){
+//                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateRed()));
+//                
+//            }
+//            else{
+//                sunburstView.setColorStrategy(new ColorStrategyDuplicateRed());
+//            
+//            }
+//        }
+//    }
+//
+//    @FXML
+//    void RadioShadowAction(ActionEvent event) {
+//        
+//        if(radioShadow.selectedProperty().getValue()){
+//            if(SelectedBoxSelectedView.isSelected()){
+//                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategySectorShades()));
+//            }
+//            else{
+//                sunburstView.setColorStrategy(new ColorStrategySectorShades());
+//            }
+//        }
+//
+//    }
 
     
     
@@ -265,7 +261,8 @@ public class MainViewController implements Initializable {
         final Set<Node> delFile = new HashSet<>();
 
         List<Node> pomocniczaFile = new ArrayList<>(); 
-        pomocniczaFile = duplicateFileTableView.getItems();
+        pomocniczaFile = fileTabController.getObservableFolderList();
+        
 //        pomocniczaFile.addAll(duplicateFolderTableView.getItems());
         
         for(Node nod : pomocniczaFile) 
@@ -281,7 +278,7 @@ public class MainViewController implements Initializable {
 
         List<Node> pomocniczaFolder = new ArrayList<>(); 
         pomocniczaFolder = foldersTabController.getObservableFolderList();
-   //     pomocniczaFolder = duplicateFolderTableView.getItems();
+  
         
         
         for(Node nod : pomocniczaFolder) 
@@ -307,16 +304,15 @@ public class MainViewController implements Initializable {
             {
                nod.getFile().delete();
             }
-            duplicateFileTableView.getItems().removeAll( delFile );
-            
-            //duplicateFolderTableView.getItems().removeAll( delFolder );
+           
+
+            foldersTabController.getObservableFolderList().removeAll( delFile );
             foldersTabController.getObservableFolderList().removeAll( delFolder );
             
             ////refresh tables
             
-            duplicateFileTableView.refresh();
-            
-//            duplicateFolderTableView.refresh();
+
+            fileTabController.getDuplicateFolderTableView().refresh();            
             foldersTabController.getDuplicateFolderTableView().refresh();
             
             
@@ -329,183 +325,49 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       
-        //bindowanie tabelki foldersList
-        
-//        duplicateFolderTableView.setEditable(true);
-//        selectedFoldersColumn.setCellValueFactory(p -> p.getValue().selectedProperty());
-//        sizeFoldersColumn.setCellValueFactory(p -> p.getValue().sizeProperty());     
-//        itemsFoldersColumn.setCellValueFactory(p -> p.getValue().numTotalChildrenProperty());
-//        pathFoldersColumn.setCellValueFactory(p -> p.getValue().pathProperty());
-        
-        
-//        CheckBoxTableCell box = new CheckBoxTableCell(); 
-//        selectedFoldersColumn.setCellFactory(box.forTableColumn(selectedFoldersColumn));
-//        selectedFoldersColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
-        
-        
-        
-  
-        //bindowanie tabelki filelist
-        
-        duplicateFileTableView.setEditable(true);
-        selectedFileColumn.setCellValueFactory(p -> p.getValue().selectedProperty());
-        sizeFileColumn.setCellValueFactory(p -> p.getValue().sizeProperty());     
-        folderFileColumn.setCellValueFactory(p -> p.getValue().pathProperty());
-  
-        
-        CheckBoxTableCell box2 = new CheckBoxTableCell();
-         selectedFileColumn.setCellFactory(box2.forTableColumn(selectedFileColumn));
-        selectedFileColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
-        
-        //// kolorowanie wierszy tabelki
-      
-      
-        duplicateFileTableView.setRowFactory(x -> new TableRow<Node>() {
-            @Override
-            public void updateItem(Node item, boolean empty) {
-                super.updateItem(item, empty) ;
-                if(item != null)
-                {
-                    switch(item.getGroupFile()%10){
-                        case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
-                            setStyle("-fx-background-color: lightblue;"); //rgb(140,0,0);"); 
-                            break;
-                        }
-                        case 1: { 
-                            setStyle("-fx-background-color: lightcoral;"); 
-                            break;
-                        }
-                        case 2: { 
-                            setStyle("-fx-background-color: lightcyan;"); 
-                            break;
-                        }
-                        case 3: { 
-                            setStyle("-fx-background-color: lightgoldenrodyellow;"); 
-                            break;
-                        }
-                        case 4: { 
-                            setStyle("-fx-background-color: lightgray;"); 
-                            break;
-                        }
-                        case 5: { 
-                            setStyle("-fx-background-color: lightgreen;"); 
-                            break;
-                        }
-                        case 6: { 
-                            setStyle("-fx-background-color: lightgrey;"); 
-                            break;
-                        }
-                        case 7: { 
-                            setStyle("-fx-background-color: lightpink;"); 
-                            break;
-                        }
-                        case 8: { 
-                            setStyle("-fx-background-color: lightsalmon;"); 
-                            break;
-                        }
-                        case 9: {                          
-                            setStyle("-fx-background-color: lightseagreen;"); 
-                            break;
-                        }
-                    }
-                }
-            }
-                
-         
-        });
-        
-//        duplicateFolderTableView.setRowFactory(x -> new TableRow<Node>() {
-//            @Override
-//            public void updateItem(Node item, boolean empty) {
-//                super.updateItem(item, empty) ;
-//                if(item != null)
-//                {
-//                switch(item.getGroupFolder()%10){
-//                        case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
-//                            setStyle("-fx-background-color: lightblue;"); //rgb(140,0,0);"); 
-//                            break;
-//                        }
-//                        case 1: { 
-//                            setStyle("-fx-background-color: lightcoral;"); 
-//                            break;
-//                        }
-//                        case 2: { 
-//                            setStyle("-fx-background-color: lightcyan;"); 
-//                            break;
-//                        }
-//                        case 3: { 
-//                            setStyle("-fx-background-color: lightgoldenrodyellow;"); 
-//                            break;
-//                        }
-//                        case 4: { 
-//                            setStyle("-fx-background-color: lightgray;"); 
-//                            break;
-//                        }
-//                        case 5: { 
-//                            setStyle("-fx-background-color: lightgreen;"); 
-//                            break;
-//                        }
-//                        case 6: { 
-//                            setStyle("-fx-background-color: lightgrey;"); 
-//                            break;
-//                        }
-//                        case 7: { 
-//                            setStyle("-fx-background-color: lightpink;"); 
-//                            break;
-//                        }
-//                        case 8: { 
-//                            setStyle("-fx-background-color: lightsalmon;"); 
-//                            break;
-//                        }
-//                        case 9: {                          
-//                            setStyle("-fx-background-color: lightseagreen;"); 
-//                            break;
-//                        }
-//                    }
-//                }
-//                
-//            }
-//        });
-        
-        /////////////////////////////
+        switchesController.initialize(this);
         
 
         //ustalenia widoku SunBurstView
         sunburstView.setScaleX(0.7);
         sunburstView.setScaleY(0.7); // zmianę rozmiaru przeprowadzać przy kazdym kliknieciu na podstawie wielkosci wkresu
-        zoomSlider.setValue(sunburstView.getScaleX());
-        zoomSlider.valueProperty().addListener(x -> {
-            double scale = zoomSlider.getValue();
-            sunburstView.setScaleX(scale);
-            sunburstView.setScaleY(scale);
-        });
+
         
-        //bindowanie suwaka
-        layerSlider.setValue(sunburstView.getMaxDeepness());
-        layerSlider.valueProperty().addListener(x -> sunburstView.setMaxDeepness((int)layerSlider.getValue()));
+
+//        zoomSlider.setValue(sunburstView.getScaleX());
+//        zoomSlider.valueProperty().addListener(x -> {
+//            double scale = zoomSlider.getValue();
+//            sunburstView.setScaleX(scale);
+//            sunburstView.setScaleY(scale);
+//        });
+//        
+//        //bindowanie suwaka
+//        layerSlider.setValue(sunburstView.getMaxDeepness());
+//        layerSlider.valueProperty().addListener(x -> sunburstView.setMaxDeepness((int)layerSlider.getValue()));
 
          sunburstRefresherThread = new Thread(new SunburstRefresher(this));
          sunburstRefresherThread.setDaemon(true); //dzieki temu apka jest zamykana razem z zakonczeniem ttego watka
          sunburstRefresherThread.start();
 
-         SelectedBoxSelectedView.selectedProperty().addListener((Observable observable)->{      
-            if(SelectedBoxSelectedView.isSelected()){
-                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(sunburstView.getColorStrategy()));
-            }
-            else{
-                RadioButton selectedRadioButton =(RadioButton)ColorStrategy.getSelectedToggle();
-                selectedRadioButton.setSelected(false);
-                selectedRadioButton.fire();    
-            }
-        });
+//         SelectedBoxSelectedView.selectedProperty().addListener((Observable observable)->{      
+//            if(SelectedBoxSelectedView.isSelected()){
+//                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(sunburstView.getColorStrategy()));
+//            }
+//            else{
+//                RadioButton selectedRadioButton =(RadioButton)ColorStrategy.getSelectedToggle();
+//                selectedRadioButton.setSelected(false);
+//                selectedRadioButton.fire();    
+//            }
+//        });
      
-         
-       
+         switchesController.setSunburstView(this.sunburstView);
+//         switchesController.setBadanieDuplikatow(this.badanieDuplikatow);
+
         
     }    
 
     public CheckBox getSelectedBoxSelectedView() {
-        return SelectedBoxSelectedView;
+        return switchesController.getSelectedBoxSelectedView();
     }
 
 }

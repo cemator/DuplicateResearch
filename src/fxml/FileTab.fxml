@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controllers.FileTabController">
+   <children>
+      <TableView fx:id="duplicateFileTableView" prefHeight="577.0" prefWidth="614.0">
+         <columns>
+            <TableColumn fx:id="selectedFileColumn" prefWidth="37.0" sortable="false" text="Selected" />
+            <TableColumn fx:id="sizeFileColumn" prefWidth="64.0" text="Size" />
+            <TableColumn fx:id="folderFileColumn" prefWidth="520.0" sortable="false" text="Folder" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
