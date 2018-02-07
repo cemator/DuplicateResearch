@@ -5,6 +5,7 @@
 package inz.v1.pkg0;
 
 import controllers.MainViewController;
+import controllers.SunburstController;
 import controls.sunburst.SunburstView;
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;
@@ -19,13 +20,17 @@ import static java.lang.Thread.sleep;
 public class SunburstRefresher implements Runnable {
     
    // SunburstView sunburstview;
-    private MainViewController fXMLDocumentController;
+    private SunburstController sunburstController;
     private boolean isStopped = false;
 
-    public SunburstRefresher(MainViewController fXMLDocumentController){
-        this.fXMLDocumentController = fXMLDocumentController;
-    }
     
+    
+    
+    
+    public SunburstRefresher(SunburstController sunburstController){
+        this.sunburstController = sunburstController;
+    }
+
     @Override
     public void run() {
         while(!isStopped){
@@ -33,11 +38,12 @@ public class SunburstRefresher implements Runnable {
             try {
                 sleep(500);} catch (InterruptedException ex) {Logger.getLogger(SunburstRefresher.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(fXMLDocumentController.getSelectedBoxSelectedView().isSelected()){
+            if(sunburstController.getMainViewController().switchesController.getSelectedBoxSelectedView().isSelected()){
+
                 Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                     @Override                           //mechanizm pozwalajacy na zmiane elementow FX GUI
                     public void run() {                 //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.refreshSunburstView();}});
+                    sunburstController.refreshSunburstView();}});
             }
         }
     }

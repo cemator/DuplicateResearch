@@ -15,7 +15,6 @@ import java.io.BufferedInputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -309,7 +308,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.SetSunBurstVisable();
+                    fXMLDocumentController.sunburstController.SetSunBurstVisable();
                 }
             });
         }
@@ -325,7 +324,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.SetProgressBar();
+                    fXMLDocumentController.sunburstController.SetProgressBar();
                 }});
         
         }
@@ -336,7 +335,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
             @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
             public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                fXMLDocumentController.SetProgressBarValue((actualItems/allItems)*100);
+                fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/allItems)*100);
             }});
         }
        
@@ -360,7 +359,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.SetSunBurst(drzewo);
+                    fXMLDocumentController.sunburstController.SetSunBurst(drzewo);
                }
              });
         }
@@ -369,7 +368,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.SetSunBurst(drzewoRoz);
+                    fXMLDocumentController.sunburstController.SetSunBurst(drzewoRoz);
 
                }
              });
