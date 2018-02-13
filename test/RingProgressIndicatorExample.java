@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package progressCircle;
+
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import progressCircle.RingProgressIndicator;
 
 
 
