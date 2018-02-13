@@ -1,4 +1,4 @@
-package controls.sunburst;
+package controllers.sunburst;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

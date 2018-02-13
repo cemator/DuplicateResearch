@@ -1,4 +1,4 @@
-package controls.sunburst;
+package controllers.sunburst;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

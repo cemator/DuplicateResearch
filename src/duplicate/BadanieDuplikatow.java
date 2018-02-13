@@ -9,7 +9,7 @@
  */
 package duplicate;
 
-import controls.sunburst.WeightedTreeItem;
+import controllers.sunburst.WeightedTreeItem;
 import controllers.MainViewController;
 import java.io.BufferedInputStream;
 import java.io.Closeable;

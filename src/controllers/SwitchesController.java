@@ -5,11 +5,11 @@
  */
 package controllers;
 
-import controls.sunburst.ColorStrategyDecoratorRedSelected;
-import controls.sunburst.ColorStrategyDuplicateColored;
-import controls.sunburst.ColorStrategyDuplicateRed;
-import controls.sunburst.ColorStrategySectorShades;
-import controls.sunburst.SunburstView;
+import controllers.sunburst.ColorStrategyDecoratorRedSelected;
+import controllers.sunburst.ColorStrategyDuplicateColored;
+import controllers.sunburst.ColorStrategyDuplicateRed;
+import controllers.sunburst.ColorStrategySectorShades;
+import controllers.sunburst.SunburstView;
 import duplicate.BadanieDuplikatow;
 import duplicate.Node;
 import java.io.File;

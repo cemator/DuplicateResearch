@@ -1,12 +1,11 @@
-package controls.skin;
+package controllers.skin;
 
 import com.sun.javafx.scene.control.behavior.BehaviorBase;
 import com.sun.javafx.scene.control.behavior.KeyBinding;
 import com.sun.javafx.scene.control.skin.BehaviorSkinBase;
-import controls.sunburst.DonutUnit;
-import controls.sunburst.IColorStrategy;
-import controls.sunburst.SunburstView;
-import controls.sunburst.WeightedTreeItem;
+import controllers.sunburst.DonutUnit;
+import controllers.sunburst.SunburstView;
+import controllers.sunburst.WeightedTreeItem;
 import duplicate.Node;
 import javafx.event.Event;
 import javafx.scene.Group;
@@ -20,6 +19,7 @@ import javafx.scene.text.TextBoundsType;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import controllers.sunburst.IColorStrategy;
 
 /**
  * Skin implementation for {@link SunburstView} Control.

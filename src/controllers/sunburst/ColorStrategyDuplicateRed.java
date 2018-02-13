@@ -1,4 +1,4 @@
-package controls.sunburst;
+package controllers.sunburst;
 
 import javafx.scene.paint.Color;
 

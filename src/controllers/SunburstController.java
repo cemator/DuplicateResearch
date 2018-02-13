@@ -5,8 +5,8 @@
  */
 package controllers;
 
-import controls.sunburst.SunburstView;
-import controls.sunburst.WeightedTreeItem;
+import controllers.sunburst.SunburstView;
+import controllers.sunburst.WeightedTreeItem;
 import duplicate.Node;
 import inz.v1.pkg0.SunburstRefresher;
 import java.net.URL;
