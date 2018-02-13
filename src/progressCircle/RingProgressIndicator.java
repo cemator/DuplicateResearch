@@ -37,7 +37,7 @@ import com.sun.javafx.css.converters.SizeConverter;
  */
 public class RingProgressIndicator extends ProgressCircleIndicator {
     public RingProgressIndicator() {
-        this.getStylesheets().add(RingProgressIndicator.class.getResource("ringprogress.css").toExternalForm());
+        this.getStylesheets().add(RingProgressIndicator.class.getResource("/resources/styles/ringprogress.css").toExternalForm());
         this.getStyleClass().add("ringindicator");
     }
 

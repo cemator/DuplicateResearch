@@ -46,7 +46,7 @@ abstract class ProgressCircleIndicator extends Control {
     private ReadOnlyBooleanWrapper indeterminate = new ReadOnlyBooleanWrapper(false);
 
     public ProgressCircleIndicator() {
-        this.getStylesheets().add(ProgressCircleIndicator.class.getResource("circleprogress.css").toExternalForm());
+        this.getStylesheets().add(ProgressCircleIndicator.class.getResource("/resources/styles/circleprogress.css").toExternalForm());
     }
 
     public int getProgress() {
