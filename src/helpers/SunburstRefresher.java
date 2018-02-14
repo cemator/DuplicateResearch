@@ -2,7 +2,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inz.v1.pkg0;
+package helpers;
 
 import controllers.MainViewController;
 import controllers.SunburstController;

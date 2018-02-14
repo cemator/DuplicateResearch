@@ -4,11 +4,13 @@
  * and open the template in the editor.
 
 //problem przy załadowywaniu duzych folderow -- liczenie po czasie i nie zamykanie programu po akmnieciu to puki nie skonczy liczyc
+//problem po porządkach -> nie zawsze da sie klikac select w tabelkach
 
 
  */
-package duplicate;
+package duplicateMachine;
 
+import helpers.Utils;
 import controllers.sunburst.WeightedTreeItem;
 import controllers.MainViewController;
 import java.io.BufferedInputStream;

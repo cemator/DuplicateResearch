@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import duplicate.Node;
+import duplicateMachine.Node;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

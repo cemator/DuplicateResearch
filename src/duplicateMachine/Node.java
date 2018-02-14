@@ -1,6 +1,6 @@
 
 
-package duplicate;
+package duplicateMachine;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -323,14 +323,7 @@ public class Node {
             });
         }
 
-//    public boolean isBlokadaListnera() {
-//        return blokadaListnera;
-//    }
-//
-//    public void setBlokadaListnera(boolean blokadaListnera) {
-//        this.blokadaListnera = blokadaListnera;
-//    }
-
+   
     public boolean isExtension() {
         return extension;
     }

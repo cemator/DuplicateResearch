@@ -2,7 +2,7 @@ package controllers.sunburst;
 
 import javafx.scene.paint.Color;
 
-import duplicate.Node;
+import duplicateMachine.Node;
 
 /**
  * A {@link IColorStrategy} which assigns each sector a distinct color tone

@@ -7,14 +7,14 @@ package controllers;
 
 import controllers.sunburst.SunburstView;
 import controllers.sunburst.WeightedTreeItem;
-import duplicate.Node;
-import inz.v1.pkg0.SunburstRefresher;
+import duplicateMachine.Node;
+import helpers.SunburstRefresher;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
-import progressCircle.RingProgressIndicator;
+import controllers.progressCircle.RingProgressIndicator;
 
 /**
  * FXML Controller class

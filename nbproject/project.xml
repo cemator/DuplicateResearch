@@ -13,7 +13,7 @@
             </extension>
         </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>Inz v1.0</name>
+            <name>DuplicateResearch</name>
             <source-roots>
                 <root id="src.dir"/>
                 <root id="src.Other%20Sources.dir"/>

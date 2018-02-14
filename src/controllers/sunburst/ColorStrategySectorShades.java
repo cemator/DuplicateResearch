@@ -1,6 +1,6 @@
 package controllers.sunburst;
 
-import duplicate.Node;
+import duplicateMachine.Node;
 import helpers.ColorHelper;
 import javafx.scene.paint.Color;
 

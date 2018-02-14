@@ -5,7 +5,7 @@
  */
 package controllers.sunburst;
 
-import duplicate.Node;
+import duplicateMachine.Node;
 import javafx.scene.paint.Color;
 
 /**

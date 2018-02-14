@@ -6,7 +6,7 @@ import com.sun.javafx.scene.control.skin.BehaviorSkinBase;
 import controllers.sunburst.DonutUnit;
 import controllers.sunburst.SunburstView;
 import controllers.sunburst.WeightedTreeItem;
-import duplicate.Node;
+import duplicateMachine.Node;
 import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.control.Tooltip;

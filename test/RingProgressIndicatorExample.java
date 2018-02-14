@@ -20,7 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import progressCircle.RingProgressIndicator;
+import controllers.progressCircle.RingProgressIndicator;
 
 
 
