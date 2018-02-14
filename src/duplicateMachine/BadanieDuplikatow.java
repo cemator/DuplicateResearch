@@ -46,7 +46,10 @@ import javafx.application.Platform;
         private List<Node> finalDuplicateFolderLists = new ArrayList<>();
         private List<Node> finalDuplicateFileLists = new ArrayList<>();
         
-        private double allItems = 0.0;
+        private TreeGenerate treeGenerate = new TreeGenerate();
+        private ProgressBarDriver progressBarDriver = new ProgressBarDriver(fXMLDocumentController);
+        
+//        private double allItems = 0.0;
         private double actualItems = 0.0;
         
         private WeightedTreeItem<Node> drzewo;
@@ -72,10 +75,13 @@ import javafx.application.Platform;
         @Override
         public void run() {
 
-            stworzDrzewoNodow(this.rootNode); //tworzy drzewo plikow badanego folderu i sprowadza do rdzenia rootNode
+            this.rootNode = treeGenerate.stworzDrzewoNodow(this.rootNode);
+//          this.rootNode = stworzDrzewoNodow(this.rootNode); //tworzy drzewo plikow badanego folderu i sprowadza do rdzenia rootNode
 
-            ustawRodzicow(this.rootNode);
+//            ustawRodzicow(this.rootNode);
+            treeGenerate.ustawRodzicow(this.rootNode);
             
+           // progressBarDriver.setProgressBar(treeGenerate.getAllItems());
             setProgressBar();
             
             hashujPliki(this.rootNode);
@@ -104,35 +110,7 @@ import javafx.application.Platform;
             
         }
         
-        private Node stworzDrzewoNodow(final Node node) { //tworzy strukture drzewiasta ze wszystkich plikow w badanym folderze
-            allItems++;
-            File plik = node.getFile();
-            if (plik.isFile()) { 
-                long size = plik.length();
-                node.setSize(size);   
-                return node;  // jesli  node jest plikiem a nie folderem to wychodzi tedy
-            }
-            
-            /////////czesc przeznaczona dla folderu \/ \/ \/
-            
-            for (File tempFile : plik.listFiles()) { //wywołanie rekurencyjne dla wszystkich plikow badanego folderu i dodanie ich do obecnego folderu
-                node.addChild(
-                    stworzDrzewoNodow(
-                        new Node(tempFile)));
-            }
 
-            return node;
-        }
-        
-        private void ustawRodzicow (Node node){
-            if(node.getChildren()!= null){
-                for(Node childNode : node.getChildren()){
-                    childNode.setParentNode(node);
-                    if(childNode.getFile().isDirectory())
-                        ustawRodzicow(childNode);
-                }   
-            }
-        }
         
         
         private Map<Long, Node> mapaDlugosci = new HashMap<>();
@@ -322,7 +300,7 @@ import javafx.application.Platform;
         
         
         private void setProgressBar(){
-            allItems = allItems*2;
+            //allItems = allItems*2;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
@@ -337,7 +315,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
             @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
             public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/allItems)*100);
+                fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/(2*treeGenerate.getAllItems()))*100);
             }});
         }
        
