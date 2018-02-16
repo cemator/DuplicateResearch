@@ -10,7 +10,7 @@ import controllers.sunburst.ColorStrategyDuplicateColored;
 import controllers.sunburst.ColorStrategyDuplicateRed;
 import controllers.sunburst.ColorStrategySectorShades;
 import controllers.sunburst.SunburstView;
-import duplicateMachine.BadanieDuplikatow;
+import duplicateMachine.SearchDuplikate;
 import duplicateMachine.Node;
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class SwitchesController implements Initializable {
     @FXML private Button selectFolderButtom;
     
     private SunburstView sunburstView = new SunburstView();
-    private BadanieDuplikatow badanieDuplikatow;
+    private SearchDuplikate badanieDuplikatow;
     private File seletedDirectory; // tutaj zostaje przypisany wybrany folder do badania
     
     
@@ -257,7 +257,7 @@ public class SwitchesController implements Initializable {
         this.sunburstView = sunburstView;
     }
 
-    public void setBadanieDuplikatow(BadanieDuplikatow badanieDuplikatow) {
+    public void setBadanieDuplikatow(SearchDuplikate badanieDuplikatow) {
         this.badanieDuplikatow = badanieDuplikatow;
     }
 

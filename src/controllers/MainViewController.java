@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import duplicateMachine.BadanieDuplikatow;
+import duplicateMachine.SearchDuplikate;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +23,7 @@ public class MainViewController implements Initializable {
 
     
     
-    private BadanieDuplikatow badanieDuplikatow;
+    private SearchDuplikate badanieDuplikatow;
     
     @FXML FoldersTabController foldersTabController;
     @FXML FileTabController fileTabController;
@@ -33,7 +33,7 @@ public class MainViewController implements Initializable {
 
     public void startResearch(File seletedDirectory){
         clearTables();
-        this.badanieDuplikatow = new BadanieDuplikatow(seletedDirectory.getAbsolutePath(),this);
+        this.badanieDuplikatow = new SearchDuplikate(seletedDirectory.getAbsolutePath(),this);
         switchesController.setBadanieDuplikatow(this.badanieDuplikatow);
         new Thread(badanieDuplikatow).start();
     }

@@ -5,6 +5,7 @@
  */
 package duplicateMachine;
 
+import controllers.sunburst.WeightedTreeItem;
 import java.io.File;
 
 /**
@@ -46,6 +47,24 @@ public class TreeGenerate {
             }
         }
 
+    public WeightedTreeItem<Node> buildTree(Node node){
+            WeightedTreeItem<Node> tempTree;
+
+            if (node.getFile().isFile()){
+                tempTree = new WeightedTreeItem<>( node.getSize(),node);
+            }
+            else{ // node is Directory
+                tempTree = new WeightedTreeItem<>(node.getSize(),node);
+                for(Node child : node.getChildren()){
+                    tempTree.getChildren().add(buildTree(child));
+                }
+            }
+            return tempTree;
+        }
+    
+    
+    
+    
     public double getAllItems() {
         return allItems;
     }

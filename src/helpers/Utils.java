@@ -5,6 +5,8 @@
  */
 package helpers;
 
+import controllers.sunburst.WeightedTreeItem;
+import duplicateMachine.Node;
 import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -65,4 +67,48 @@ import java.security.MessageDigest;
             }
             return rozszerzenie;
         }
+        
+        public static WeightedTreeItem<Node> zNodaNaDrzewoRozszerzen(Node node ){
+            WeightedTreeItem<Node> treeExt = new WeightedTreeItem<>(node.getSize(),node);
+            java.util.List<Node> listaTemp=new java.util.ArrayList();
+            
+            for(Node nodeTemp : node.getChildren()){
+                boolean obecneRozszerzenie = false;
+                int numerObiektuRoz = -1;
+                if(nodeTemp.getFile().isFile()){//jesli plik
+                    for(int j = listaTemp.size() ; j>0 ; j--){//przejscie przez cala liste juz dodanych nowych obiektow w sprawdzeniu czy rozszerzenie nie pasuje do ktoregos z nich
+                        if(Utils.ustalRozszerzenie(nodeTemp.getFile()).equals((listaTemp.get(j-1).getExtensionName()).substring(2))){//sprawdzenie czy plik o posiada jakies piki o tym rozszerzeniu w bazie
+                            obecneRozszerzenie=true; //jest obecne juz takie rozszerzenie
+                            numerObiektuRoz = j-1; //oznaczenie na ktorej pozycji w listaTemp leży nasze rozszerzenie
+                            //break; // <- po znalezieniepowoduje wyjscie z petli
+                        }
+                    }
+                    
+                    if(obecneRozszerzenie==false){ // jesli nie bylo wczesniej w tym folderze pliku o takim rozszerzeniu
+                          listaTemp.add(new Node(("#."+Utils.ustalRozszerzenie(nodeTemp.getFile()) )
+                                ,true
+                                ,nodeTemp.getSize())); // dodaj do listy nowy plik rozszerzen z nazwa rozszerzenia i informacja ze to rozszerzenie a nie zwykły nod
+                       
+                    }
+                    else{ // jesli takie rozszerzenie juz sie pojawilo wczesciej
+                        listaTemp.get(numerObiektuRoz).setSize(listaTemp.get(numerObiektuRoz).getSize()+nodeTemp.getSize()); // dodaj do obiektu wielkosc nowego pliku
+                    }
+                }
+                
+                
+                else if(nodeTemp.getFile().isDirectory()){
+                    treeExt.getChildren().add(zNodaNaDrzewoRozszerzen( nodeTemp)); 
+               
+                }
+            }
+  
+            for(Node listNode: listaTemp){
+                treeExt.getChildren().add(new WeightedTreeItem<>(listNode.getSize(),listNode));
+              
+            }
+
+            return treeExt;
+        }
+        
+        
     }

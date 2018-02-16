@@ -35,7 +35,7 @@ import javafx.application.Platform;
  *
  * @author Seweryn
  */
-    public class BadanieDuplikatow implements Runnable{
+    public class SearchDuplikate implements Runnable{
         
         
         private MainViewController fXMLDocumentController;
@@ -55,18 +55,13 @@ import javafx.application.Platform;
         private WeightedTreeItem<Node> drzewoRoz;
         
 
-        public BadanieDuplikatow(String sciezkaPliku, MainViewController fXMLDocumentController){
+        public SearchDuplikate(String sciezkaPliku, MainViewController fXMLDocumentController){
             this.fXMLDocumentController = fXMLDocumentController; //instancja kontrolera widoku
             this.progressBarDriver = new ProgressBarDriver(fXMLDocumentController);
             this.hasher = new Hasher(progressBarDriver);
             
             this.rootNode = new Node(new File(sciezkaPliku));
-            
-            
-
     }
-
-
 
         @Override
         public void run() {
@@ -74,32 +69,24 @@ import javafx.application.Platform;
             this.rootNode = treeGenerate.stworzDrzewoNodow(this.rootNode);
             treeGenerate.ustawRodzicow(this.rootNode);
             
-            
             progressBarDriver.setProgressBar(treeGenerate.getAllItems());
 
-           
             hasher.hashujPliki(this.rootNode);
             hasher.hashujFoldery(this.rootNode); // dodaje do folderów romiar oraz liczbe plikow potomnych ORAZ tworzy hasha z hashy wszystkich plikow potomnych (wsteonie posortowanych)
 
-            
             searchDuplicatesRecursively(this.rootNode);//tworzy mape nodow o takich samych hashach
-            
             pruneNonDuplicates();  // usun z mapDuplicates wpisy z pojedynczymi nodami(plikami)
             
-            populateViewers();
-            
+            populateViewers();            
             setSunBurstVisable();
-            
             setTableView();           
             
-            drzewo = buildTree(this.rootNode);
+            drzewo = treeGenerate.buildTree(this.rootNode);
             
-            ///////////// na rozszerzenia
+            ///////////// TO EXTENSION
            
-
-              drzewoRoz = zNodaNaDrzewoRozszerzen(this.rootNode);
-              
-              setSunburstDuplicate();
+            drzewoRoz = Utils.zNodaNaDrzewoRozszerzen(this.rootNode);        
+            setSunburstDuplicate();
             
         }
         
@@ -115,7 +102,6 @@ import javafx.application.Platform;
             }  //byc moze cala ta modeda dubluje pliki poniewaz jest dodawana po lub przed wyszukiwaniem folderow
 	}
         
-        
         private void pruneNonDuplicates() {
             String[] copyOfStrHashes = this.mapDuplicates.keySet().toArray(new String[0]);
             for (String strHash : copyOfStrHashes) {
@@ -126,7 +112,6 @@ import javafx.application.Platform;
             }
 	}
         
-        
         public void populateViewers(){
             int groupFile = 0;
             int groupFolder = 0;
@@ -134,16 +119,13 @@ import javafx.application.Platform;
             for (Map.Entry<String, List<Node>> entry : this.mapDuplicates.entrySet()) {
                 List<Node> duplicateList = entry.getValue();
                 
-
                 boolean isFile = duplicateList.get(0).getFile().isFile();
                 if (isFile) {
                     groupFile++;
                     for(Node node : duplicateList){
                         node.setGroupFile(groupFile);
                         node.setDuplicate(true);
-                        
                     }
-
                     this.finalDuplicateFileLists.addAll(duplicateList); //na tym etapie dodawane sa juz zdublowane pliki nodow
                 } 
                 else {
@@ -151,9 +133,7 @@ import javafx.application.Platform;
                     for(Node node : duplicateList){
                         node.setGroupFolder(groupFolder);
                         node.setDuplicate(true);
-                        
                     }
-
                     this.finalDuplicateFolderLists.addAll(duplicateList);
                 }
             }
@@ -161,9 +141,10 @@ import javafx.application.Platform;
         } //ta klasa ma pobrac wszystkie nody z mapy duplicatemap i dac je do jakiejs listy obiektow nod azeby moc je pokazac w tabelli
         
         
+        
+        /////UPDATE VIEWERS \\\\\\
+        
         private void setSunBurstVisable(){
-           
-           
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
@@ -177,22 +158,6 @@ import javafx.application.Platform;
             fXMLDocumentController.SetDuplicateFileTable(finalDuplicateFileLists);
         }
 
-        
-        private WeightedTreeItem<Node> buildTree(Node node){
-            WeightedTreeItem<Node> tempTree;
-
-            if (node.getFile().isFile()){
-                tempTree = new WeightedTreeItem<>( node.getSize(),node);
-            }
-            else{ // node is Directory
-                tempTree = new WeightedTreeItem<>(node.getSize(),node);
-                for(Node child : node.getChildren()){
-                    tempTree.getChildren().add(buildTree(child));
-                }
-            }
-            return tempTree;
-        }
-        
         public void setSunburstDuplicate(){
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
@@ -210,49 +175,5 @@ import javafx.application.Platform;
 
                }
              });
-        }
-        
-          
-        private WeightedTreeItem<Node> zNodaNaDrzewoRozszerzen(Node node ){
-            WeightedTreeItem<Node> treeExt = new WeightedTreeItem<>(node.getSize(),node);
-            java.util.List<Node> listaTemp=new java.util.ArrayList();
-            
-            for(Node nodeTemp : node.getChildren()){
-                boolean obecneRozszerzenie = false;
-                int numerObiektuRoz = -1;
-                if(nodeTemp.getFile().isFile()){//jesli plik
-                    for(int j = listaTemp.size() ; j>0 ; j--){//przejscie przez cala liste juz dodanych nowych obiektow w sprawdzeniu czy rozszerzenie nie pasuje do ktoregos z nich
-                        if(Utils.ustalRozszerzenie(nodeTemp.getFile()).equals((listaTemp.get(j-1).getExtensionName()).substring(2))){//sprawdzenie czy plik o posiada jakies piki o tym rozszerzeniu w bazie
-                            obecneRozszerzenie=true; //jest obecne juz takie rozszerzenie
-                            numerObiektuRoz = j-1; //oznaczenie na ktorej pozycji w listaTemp leży nasze rozszerzenie
-                            //break; // <- po znalezieniepowoduje wyjscie z petli
-                        }
-                    }
-                    
-                    if(obecneRozszerzenie==false){ // jesli nie bylo wczesniej w tym folderze pliku o takim rozszerzeniu
-                          listaTemp.add(new Node(("#."+Utils.ustalRozszerzenie(nodeTemp.getFile()) )
-                                ,true
-                                ,nodeTemp.getSize())); // dodaj do listy nowy plik rozszerzen z nazwa rozszerzenia i informacja ze to rozszerzenie a nie zwykły nod
-                       
-                    }
-                    else{ // jesli takie rozszerzenie juz sie pojawilo wczesciej
-                        listaTemp.get(numerObiektuRoz).setSize(listaTemp.get(numerObiektuRoz).getSize()+nodeTemp.getSize()); // dodaj do obiektu wielkosc nowego pliku
-                    }
-                }
-                
-                
-                else if(nodeTemp.getFile().isDirectory()){
-                    treeExt.getChildren().add(zNodaNaDrzewoRozszerzen( nodeTemp)); 
-               
-                }
-            }
-  
-            for(Node listNode: listaTemp){
-                treeExt.getChildren().add(new WeightedTreeItem<>(listNode.getSize(),listNode));
-              
-            }
-
-            return treeExt;
-        }
-    
+        }     
     }
