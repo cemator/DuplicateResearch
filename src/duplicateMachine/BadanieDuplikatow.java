@@ -47,10 +47,10 @@ import javafx.application.Platform;
         private List<Node> finalDuplicateFileLists = new ArrayList<>();
         
         private TreeGenerate treeGenerate = new TreeGenerate();
-        private ProgressBarDriver progressBarDriver = new ProgressBarDriver(fXMLDocumentController);
+        private ProgressBarDriver progressBarDriver;
         
 //        private double allItems = 0.0;
-        private double actualItems = 0.0;
+//        private double actualItems = 0.0;
         
         private WeightedTreeItem<Node> drzewo;
         
@@ -59,6 +59,8 @@ import javafx.application.Platform;
 
         public BadanieDuplikatow(String sciezkaPliku, MainViewController fXMLDocumentController){
             this.fXMLDocumentController = fXMLDocumentController; //instancja kontrolera widoku
+            progressBarDriver = new ProgressBarDriver(fXMLDocumentController);
+            
             this.rootNode = new Node(new File(sciezkaPliku));
             
             
@@ -81,9 +83,10 @@ import javafx.application.Platform;
 //            ustawRodzicow(this.rootNode);
             treeGenerate.ustawRodzicow(this.rootNode);
             
-           // progressBarDriver.setProgressBar(treeGenerate.getAllItems());
-            setProgressBar();
+            progressBarDriver.setProgressBar(treeGenerate.getAllItems());
+           // setProgressBar();
             
+           
             hashujPliki(this.rootNode);
             
             hashujFoldery(this.rootNode); // dodaje do folderów romiar oraz liczbe plikow potomnych ORAZ tworzy hasha z hashy wszystkich plikow potomnych (wsteonie posortowanych)
@@ -117,7 +120,8 @@ import javafx.application.Platform;
         private Set<Long> setDlugosci = new HashSet<>();
         
         private void hashujPliki(final Node node){                              // metoda do logicznej poprawki!
-           setProgressBarValue();
+           // setProgressBarValue();
+           progressBarDriver.setProgressBarValue();
            File file = node.getFile();
             
             if (file.isFile()) {
@@ -187,7 +191,9 @@ import javafx.application.Platform;
       
 
         private void hashujFoldery(Node node) {
-            setProgressBarValue();
+            // setProgressBarValue();
+            progressBarDriver.setProgressBarValue();
+            
             if (node.getFile().isFile()) {
                 return;
             }
@@ -299,26 +305,8 @@ import javafx.application.Platform;
         }
         
         
-        private void setProgressBar(){
-            //allItems = allItems*2;
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-                @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-                public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.sunburstController.SetProgressBar();
-                }});
         
-        }
-        
-        private void setProgressBarValue(){
-            actualItems++;
-            //System.out.println(actualItems + "<- actual | all -> " + allItems + " | result ->" + ((actualItems/allItems)*100));
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-            @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-            public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/(2*treeGenerate.getAllItems()))*100);
-            }});
-        }
-       
+
         
         private WeightedTreeItem<Node> buildTree(Node node){
             WeightedTreeItem<Node> tempTree;
