@@ -8,7 +8,7 @@ package controllers;
 import controllers.sunburst.SunburstView;
 import controllers.sunburst.WeightedTreeItem;
 import duplicateMachine.Node;
-import helpers.SunburstRefresher;
+import controllers.sunburst.SunburstRefresher;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

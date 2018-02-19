@@ -30,6 +30,8 @@ public class FileTabController implements Initializable {
     @FXML private TableColumn<Node, Boolean> selectedFileColumn;
     @FXML private TableColumn<Node, Number> sizeFileColumn;
     @FXML private TableColumn<Node, String> folderFileColumn;
+    
+    
     ObservableList<Node> ObservableFileList = FXCollections.observableArrayList();
     
     public void SetDuplicateFileTable(java.util.List<Node> listaObiektow){

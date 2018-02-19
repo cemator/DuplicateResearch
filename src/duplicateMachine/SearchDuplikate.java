@@ -13,22 +13,11 @@ package duplicateMachine;
 import helpers.Utils;
 import controllers.sunburst.WeightedTreeItem;
 import controllers.MainViewController;
-import java.io.BufferedInputStream;
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javafx.application.Platform;
 
 /**
@@ -83,10 +72,12 @@ import javafx.application.Platform;
             
             drzewo = treeGenerate.buildTree(this.rootNode);
             
+            setSunburstDuplicate();
+            
             ///////////// TO EXTENSION
            
             drzewoRoz = Utils.zNodaNaDrzewoRozszerzen(this.rootNode);        
-            setSunburstDuplicate();
+            
             
         }
         

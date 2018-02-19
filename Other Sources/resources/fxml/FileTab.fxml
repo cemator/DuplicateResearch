@@ -4,14 +4,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controllers.FileTabController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FileTabController">
    <children>
       <TableView fx:id="duplicateFileTableView" prefHeight="577.0" prefWidth="614.0">
          <columns>
-            <TableColumn fx:id="selectedFileColumn" prefWidth="37.0" sortable="false" text="Selected" />
-            <TableColumn fx:id="sizeFileColumn" prefWidth="64.0" text="Size" />
-            <TableColumn fx:id="folderFileColumn" prefWidth="520.0" sortable="false" text="Folder" />
+            <TableColumn fx:id="selectedFileColumn" prefWidth="48.377960324287415" sortable="false" text="Zaznacz" />
+            <TableColumn fx:id="sizeFileColumn" prefWidth="52.91335678100586" text="Rozmiar" />
+            <TableColumn fx:id="folderFileColumn" prefWidth="520.0" sortable="false" text="Ścieżka dostępu" />
          </columns>
       </TableView>
    </children>
