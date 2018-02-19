@@ -41,7 +41,7 @@ import javafx.application.Platform;
         
         
         private WeightedTreeItem<Node> drzewo;    
-        private WeightedTreeItem<Node> drzewoRoz;
+        private WeightedTreeItem<Node> treeExt;
         
 
         public SearchDuplikate(String sciezkaPliku, MainViewController fXMLDocumentController){
@@ -76,7 +76,7 @@ import javafx.application.Platform;
             
             ///////////// TO EXTENSION
            
-            drzewoRoz = Utils.zNodaNaDrzewoRozszerzen(this.rootNode);        
+            treeExt = Utils.fromNodeToTreeExt(this.rootNode);        
             
             
         }
@@ -162,7 +162,7 @@ import javafx.application.Platform;
             Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
                 @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
                 public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.sunburstController.SetSunBurst(drzewoRoz);
+                    fXMLDocumentController.sunburstController.SetSunBurst(treeExt);
 
                }
              });
