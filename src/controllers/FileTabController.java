@@ -55,8 +55,10 @@ public class FileTabController implements Initializable {
         folderFileColumn.setCellValueFactory(p -> p.getValue().pathProperty());
   
         
-        CheckBoxTableCell box2 = new CheckBoxTableCell();
-         selectedFileColumn.setCellFactory(box2.forTableColumn(selectedFileColumn));
+    //    CheckBoxTableCell box2 = new CheckBoxTableCell();
+    
+    
+        selectedFileColumn.setCellFactory(CheckBoxTableCell.forTableColumn(selectedFileColumn));
         selectedFileColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
         
         //// kolorowanie wierszy tabelki
