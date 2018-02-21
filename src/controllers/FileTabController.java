@@ -64,15 +64,14 @@ public class FileTabController implements Initializable {
         //// kolorowanie wierszy tabelki
       
       
-        duplicateFileTableView.setRowFactory(x -> new TableRow<Node>() {
+        duplicateFileTableView.setRowFactory(x -> new TableRow<Node>(){
             @Override
-            public void updateItem(Node item, boolean empty) {
-                super.updateItem(item, empty) ;
-                if(item != null)
-                {
+            public void updateItem(Node item, boolean empty){
+                super.updateItem(item, empty);
+                if(item != null){
                     switch(item.getGroupFile()%10){
-                        case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
-                            setStyle("-fx-background-color: lightblue;"); //rgb(140,0,0);"); 
+                        case 0: { 
+                            setStyle("-fx-background-color: lightblue;");
                             break;
                         }
                         case 1: { 
@@ -114,8 +113,6 @@ public class FileTabController implements Initializable {
                     }
                 }
             }
-                
-         
         });
         
     }    
