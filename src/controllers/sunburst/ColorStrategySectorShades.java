@@ -13,26 +13,10 @@ import java.util.List;
  */
 public class ColorStrategySectorShades implements IColorStrategy{
 
-    /***************************************************************************
-     *                                                                         *
-     * Private fields                                                          *
-     *                                                                         *
-     **************************************************************************/
-
     private final List<Color> sectorColors = new ArrayList<>();
     private final double maxShades = 8;
 
-    /***************************************************************************
-     *                                                                         *
-     * Constructor                                                             *
-     *                                                                         *
-     **************************************************************************/
-
-    /**
-     * Creates a new ColorStrategySectorShades {@link IColorStrategy}
-     */
     public ColorStrategySectorShades(){
-
         // We define some nice looking colors for our first few sectors
         sectorColors.add(Color.CORNFLOWERBLUE);
         sectorColors.add(Color.LIGHTGREEN);
@@ -43,14 +27,7 @@ public class ColorStrategySectorShades implements IColorStrategy{
         sectorColors.add(Color.web("F6EC46")); // Yellow
         sectorColors.add(Color.web("00A1DB")); // Blue
         sectorColors.add(Color.web("DF2126")); // Red
-
     }
-
-    /***************************************************************************
-     *                                                                         *
-     * Overridden Public API                                                   *
-     *                                                                         *
-     **************************************************************************/
 
     @Override
     public Color colorFor(WeightedTreeItem<Node> item, int sector, int level) {
@@ -60,12 +37,6 @@ public class ColorStrategySectorShades implements IColorStrategy{
         }
         return color;
     }
-
-    /***************************************************************************
-     *                                                                         *
-     * Private methods                                                         *
-     *                                                                         *
-     **************************************************************************/
 
     private Color getSectorColor(int sector){
         while(sectorColors.size() <= (sector)){
