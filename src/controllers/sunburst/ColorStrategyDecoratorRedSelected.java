@@ -25,5 +25,4 @@ public class ColorStrategyDecoratorRedSelected extends IColorStrategyDecorator {
             }
         return tempColor;
     }
-
 }
