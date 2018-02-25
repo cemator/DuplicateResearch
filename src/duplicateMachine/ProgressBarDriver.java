@@ -10,10 +10,10 @@ import javafx.application.Platform;
 
 /**
  *
- * @author Lenovo
+ * @author Seweryn Siedlecki
  */
 public class ProgressBarDriver {
-    private MainViewController fXMLDocumentController;
+    private final MainViewController fXMLDocumentController;
     private double actualItems = 0.0;
     private double allItems = 0.0;
 
@@ -22,22 +22,16 @@ public class ProgressBarDriver {
     }
     
     public void setProgressBar(double allItems){
-            this.allItems = allItems*2;
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-                @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-                public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.sunburstController.SetProgressBar();
-                }});
-        
-        }
+        this.allItems = allItems*2;
+        Platform.runLater(() -> {
+            fXMLDocumentController.sunburstController.SetProgressBar();
+        });
+    }
     
     public void setProgressBarValue(){
-            actualItems++;
-            //System.out.println(actualItems + "<- actual | all -> " + allItems + " | result ->" + ((actualItems/allItems)*100));
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-            @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-            public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/(allItems))*100);
-            }});
-        }
+        actualItems++;
+        Platform.runLater(() -> {       
+            fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/(allItems))*100);
+        });
+    }
 }
