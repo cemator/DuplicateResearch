@@ -17,7 +17,7 @@ public class TreeGenerate {
     private double allItems = 0.0;
     
     public Node stworzDrzewoNodow(final Node node) { //tworzy strukture drzewiasta ze wszystkich plikow w badanym folderze
-            allItems++;
+            allItems++;  System.out.println("Allitems: "+allItems);
             File plik = node.getFile();
             if (plik.isFile()) { 
                 long size = plik.length();

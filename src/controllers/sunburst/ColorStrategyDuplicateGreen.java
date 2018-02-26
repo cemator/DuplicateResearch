@@ -8,11 +8,11 @@ import duplicateMachine.Node;
  * A {@link IColorStrategy} which assigns each sector a distinct color tone
  * and colorizes the different levels of a sector with shades of this color tone.
  */
-public class ColorStrategyDuplicateRed implements IColorStrategy{
+public class ColorStrategyDuplicateGreen implements IColorStrategy{
 
    
     
-    public ColorStrategyDuplicateRed(){
+    public ColorStrategyDuplicateGreen(){
 
     }
 
@@ -20,7 +20,19 @@ public class ColorStrategyDuplicateRed implements IColorStrategy{
     @Override
     public Color colorFor(WeightedTreeItem<Node> item, int sector, int level) {
 
+        Color tempColor;// = iColorStrategy.colorFor(item,sector,level);
+        
+            if(item.getValue().isDuplicate()){
+                tempColor = Color.LIMEGREEN;
+            }
+            else{
             return Color.LIGHTYELLOW;
+            }
+                
+        
+        return tempColor;
+        
+           // return Color.LIGHTYELLOW;
 
     }
 

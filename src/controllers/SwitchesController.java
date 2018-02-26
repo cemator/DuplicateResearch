@@ -5,9 +5,10 @@
  */
 package controllers;
 
+
 import controllers.sunburst.ColorStrategyDecoratorRedSelected;
 import controllers.sunburst.ColorStrategyDuplicateColored;
-import controllers.sunburst.ColorStrategyDuplicateRed;
+import controllers.sunburst.ColorStrategyDuplicateGreen;
 import controllers.sunburst.ColorStrategySectorShades;
 import controllers.sunburst.SunburstView;
 import duplicateMachine.SearchDuplikate;
@@ -55,9 +56,13 @@ public class SwitchesController implements Initializable {
     @FXML private RadioButton radioHighContrast;
     
     @FXML private CheckBox SelectedBoxSelectedView;
+   
+    
     @FXML private ToggleGroup ColorStrategy;
     
-    private ColorStrategyDuplicateRed colorStrategyDuplicateRed = new ColorStrategyDuplicateRed();
+  // private ColorStrategyDuplicateRed colorStrategyDuplicateRed = new ColorStrategyDuplicateRed(); // prawdopodobnie nie uzywane , po usuniecia brak zwiaz we funkcjonalnosci
+    
+    
     private MainViewController mainController;
     
     @FXML private Button selectFolderButtom;
@@ -177,8 +182,8 @@ public class SwitchesController implements Initializable {
     void RadioGroupColoredAction(ActionEvent event) {
         
         if(radioGroupColored.selectedProperty().getValue()){ //tutaj dodac aby przy zaznaczeniu dodawał sie proces odswierzania, a przy wylaczeniu aby sie pauzował
-            if(SelectedBoxSelectedView.isSelected()){
-                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateColored()));
+    if(SelectedBoxSelectedView.isSelected()){
+        sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateColored()));
             }
             else{
                 
@@ -193,11 +198,11 @@ public class SwitchesController implements Initializable {
         
         if(radioHighContrast.selectedProperty().getValue()){
             if(SelectedBoxSelectedView.isSelected()){
-                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateRed()));
+                sunburstView.setColorStrategy(new ColorStrategyDecoratorRedSelected(new ColorStrategyDuplicateGreen()));
                 
             }
             else{
-                sunburstView.setColorStrategy(new ColorStrategyDuplicateRed());
+                sunburstView.setColorStrategy(new ColorStrategyDuplicateGreen());
             
             }
         }
@@ -243,6 +248,8 @@ public class SwitchesController implements Initializable {
                 selectedRadioButton.fire();    
             }
         });
+        
+     
 
     }    
 

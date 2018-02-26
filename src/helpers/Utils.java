@@ -68,7 +68,7 @@ import java.security.MessageDigest;
             return rozszerzenie;
         }
         
-        public static WeightedTreeItem<Node> zNodaNaDrzewoRozszerzen(Node node ){
+        public static WeightedTreeItem<Node> fromNodeToTreeExt(Node node ){
             WeightedTreeItem<Node> treeExt = new WeightedTreeItem<>(node.getSize(),node);
             java.util.List<Node> listaTemp=new java.util.ArrayList();
             
@@ -97,7 +97,7 @@ import java.security.MessageDigest;
                 
                 
                 else if(nodeTemp.getFile().isDirectory()){
-                    treeExt.getChildren().add(zNodaNaDrzewoRozszerzen( nodeTemp)); 
+                    treeExt.getChildren().add(fromNodeToTreeExt( nodeTemp)); 
                
                 }
             }

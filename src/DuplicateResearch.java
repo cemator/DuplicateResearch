@@ -12,9 +12,8 @@ import javafx.stage.Stage;
  * @author Seweryn
  */
 public class DuplicateResearch extends Application {
-    
     @Override
-    public void start(Stage stage) throws Exception { //  brench test
+    public void start(Stage stage) throws Exception { 
         Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/MainView.fxml"));
 
         Scene scene = new Scene(root);
@@ -22,6 +21,4 @@ public class DuplicateResearch extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    
 }

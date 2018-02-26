@@ -4,19 +4,10 @@
  */
 package controllers.sunburst;
 
-import controllers.MainViewController;
 import controllers.SunburstController;
-import controllers.sunburst.SunburstView;
-import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import static java.lang.Thread.sleep;
-import static java.lang.Thread.sleep;
-import static java.lang.Thread.sleep;
-import static java.lang.Thread.sleep;
-import static java.lang.Thread.sleep;
-import static java.lang.Thread.sleep;
 import static java.lang.Thread.sleep;
 
 /**

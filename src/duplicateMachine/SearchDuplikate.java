@@ -150,21 +150,14 @@ import javafx.application.Platform;
         }
 
         public void setSunburstDuplicate(){
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-                @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-                public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.sunburstController.SetSunBurst(drzewo);
-               }
-             });
+            Platform.runLater(() -> {         //mechanizm pozwalajacy na zmiane elementow FX GUI
+                fXMLDocumentController.sunburstController.SetSunBurst(drzewo);
+            });
         }
         
         public void setSunburstExtension(){
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-                @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-                public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.sunburstController.SetSunBurst(treeExt);
-
-               }
-             });
+            Platform.runLater(() -> {
+                fXMLDocumentController.sunburstController.SetSunBurst(treeExt);
+            });
         }     
     }

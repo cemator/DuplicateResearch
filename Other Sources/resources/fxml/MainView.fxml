@@ -30,7 +30,7 @@
             <fx:include fx:id="switches" source="Switches.fxml" />
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="126.0" prefHeight="536.0" prefWidth="607.0" >
+      <Pane layoutX="32.0" layoutY="109.0" prefHeight="536.0" prefWidth="607.0">
          <children>
             <fx:include fx:id="sunburst" source="Sunburst.fxml" />
          </children>

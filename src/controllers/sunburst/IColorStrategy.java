@@ -1,4 +1,4 @@
-    package controllers.sunburst;
+package controllers.sunburst;
 
 import duplicateMachine.Node;
 import javafx.scene.paint.Color;

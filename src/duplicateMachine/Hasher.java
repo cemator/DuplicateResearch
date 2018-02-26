@@ -49,10 +49,12 @@ public class Hasher {
     
      public void hashujPliki(final Node node){                              // metoda do logicznej poprawki!
 
-           progressBarDriver.setProgressBarValue();
+           
            File file = node.getFile();
             
             if (file.isFile()) {
+               progressBarDriver.setProgressBarValue();
+               
                long rozmiarPliku = file.length();
                if (this.mapaDlugosci.containsKey(rozmiarPliku) == false) { // sprawdza czy dlugoci pliku nie ma w mapie dlugoci plikow
                     this.mapaDlugosci.put(rozmiarPliku, node);              // jesli nie ma to go dodaje
@@ -78,13 +80,14 @@ public class Hasher {
                
                     node.setHash(strHash); //dodaje pełnego hasha          
                 }
-                    return; //jesli jest to plik to wychodzi z metody, jesli nie to bada foldery potomne \/
+                 
             }
+            else{
 
-            for (Node child : node.getChildren()) {
-                hashujPliki(child);
+                for (Node child : node.getChildren()) {
+                    hashujPliki(child);
+                }
             }
-        
         }
      
      private String hashFile(File file) {
@@ -115,42 +118,40 @@ public class Hasher {
      
      public void hashujFoldery(Node node) {
 
-            progressBarDriver.setProgressBarValue();
-            
-            if (node.getFile().isFile()) {
-                return;
-            }
-
-            long totalSize = 0;
-            int totalNumChildren = 0;
-            List<String> sortedHashes = new ArrayList<>(); //zbior hashow folderow
-            
-            for (Node child : node.getChildren()) {
+            if (node.getFile().isDirectory()) {
+                progressBarDriver.setProgressBarValue();
                 
-                hashujFoldery(child);
+                long totalSize = 0;
+                int totalNumChildren = 0;
+                List<String> sortedHashes = new ArrayList<>(); //zbior hashow folderow
 
-                sortedHashes.add(child.getHash()); //dodawanie hasha elementu potomnego (moze byc to folder lub tez PLIK)
-                totalSize += child.getSize();
+                for (Node child : node.getChildren()) {
 
-                if (child.getFile().isFile()) {
-                    totalNumChildren++;
-                } else {
-                    totalNumChildren += child.getTotalChildrenCount() + 1; // children + this folder
+                    hashujFoldery(child);
+                    sortedHashes.add(child.getHash()); //dodawanie hasha elementu potomnego (moze byc to folder lub tez PLIK)
+                    totalSize += child.getSize();
+
+                    if (child.getFile().isFile()) {
+                        totalNumChildren++;
+                    } else {
+                        totalNumChildren += child.getTotalChildrenCount() + 1; // children + this folder
+                    }
                 }
-            }
-            
-            node.setSize(totalSize);
-            node.setNumTotalChildren(totalNumChildren);
 
-            this.messageDigest.reset();
-            this.messageDigest.update("<folder>".getBytes(Charset.defaultCharset())); // folder's MD5 seed, includes illegal characters for filepaths
-            Collections.sort(sortedHashes);
-            for (String sortedHash : sortedHashes) {
-                this.messageDigest.update(sortedHash.getBytes(Charset.defaultCharset()));
+                node.setSize(totalSize);
+                node.setNumTotalChildren(totalNumChildren);
+
+                this.messageDigest.reset();
+                this.messageDigest.update("<folder>".getBytes(Charset.defaultCharset())); // folder's MD5 seed, includes illegal characters for filepaths
+                Collections.sort(sortedHashes);
+                for (String sortedHash : sortedHashes) {
+                    this.messageDigest.update(sortedHash.getBytes(Charset.defaultCharset()));
+                }
+                String strHash = Utils.getHash(node.getFile(), this.messageDigest);
+
+                node.setHash(strHash);
+            
             }
-            String strHash = Utils.getHash(node.getFile(), this.messageDigest);
-        
-            node.setHash(strHash);
 	}
         
     

@@ -203,32 +203,27 @@ public class Node {
         
         public void AddListeners(){
             this.selected.addListener((Observable observable) ->{
-                if(this.file.isDirectory()){ //przypadek dla folderu
-                    // listener reaguje tylko na zmiany, a wiec jesli zmiana nastapiła 
-                    //na zaznaczenie(true) to jest to zmiana spowodowany tylko 3 przypadkami:
-                    // - wszystkie potomne zozstały zaznaczone i powinno byc to zaznaczone z automatu
-                    // - uzytkownik kliknał zaznacz
-                    // - folder nadrzedny został zaznaczony 
-                    // Wszystkie 3 zmiany sprowadzaja sie do tgo by bezwzglednie zaznaczyc wszystkie potomne
-                    if(this.selected.getValue()==true){ // jesli folder byl klikniety na true
-                   
+                if(this.file.isDirectory()){ /* Przypadek dla folderu.
+                                                Listener reaguje tylko na zmiany, a wiec jesli zmiana zaznaczenia nastapiła 
+                                                na zaznaczenie(true) to jest to zmiana spowodowana tylko 3 przypadkami:
+                                                - wszystkie potomne zozstały zaznaczone i bierzący folder powinien zostać zaznaczony automatycznie
+                                                - użytkownik zaznaczył bierzący folder
+                                                - folder nadrzedny został zaznaczony .
+                                                Wszystkie 3 zmiany sprowadzaja sie do tego by bezwzglednie zaznaczyc wszystkie potomne pliki i foldery. */
+                    if(this.selected.getValue()==true){ // Zmiana nastąpiła na zaznaczenie (selected == true)
                         for(Node childNode : this.getChildren()) {
-                            childNode.setSelected(true);
-                            
+                            childNode.setSelected(true); //Zaznaczenie wszystkich potomnych plików i folderów.
                         }
                     }    
-
-
-                    else{ // w przypadku zmiany folderu na false
-                    // W przypadku else, czyi zmiana nastAPIŁA NA ODZNACZENIE MOZE BYC TO SPOWODOWANE 3 PRZypadkami
-
-                        // - ktorys z podrzednych elementow został odklikniety.
-                            //POMYSŁ NA IDENTYFIKACJE
-                            //- sprawdzic czy ilosc potomnych elementow zgadza sie iloscia zaznaczonych potomnych elementow
+                    else{ // Zmiana nastąpiła na odznaczenie (selected == false)
+                    // W przypadku kiedy zmiana zaznaczenia folderu nastąpiła na odznaczenie może być to spowodowane 3 przypadkami:
+                    // - ktorys z podrzednych elementow został odklikniety.
+                            //WERYFIKACJA
+                            //- sprawdzenie czy ilosc potomnych elementow zgadza sie iloscia zaznaczonych potomnych elementow
                             //ZADANIA
                             //-poza odkliknieciem samego siebie nie robic nic. A z racji tego ze caly listener reaguje na odklikniecie to po
-                            //identyfikacji ze nastapilo to  skutek odklikania podrzedniego nie robic nic
-                            //POMYSL PSEUDOKODU:
+                            //identyfikacji ze nastapilo to w skutek odklikania podrzedniego nie robic nic
+                            
                         
                         int iloscPlikowPotomnych = 0;
                         int iloscPlikowZaznaczonychPotomnych = 0;
