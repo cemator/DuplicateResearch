@@ -94,10 +94,9 @@ public class SunburstController implements Initializable {
         pane.setVisible(true);
         if(sunburstView.getRootItem() != null){
             pane.setCenter(sunburstView);
-          
         }
         else{
-            sunburstIsNull = true; //jesli sunburst jeszcze nie gotowy podnies flage
+            sunburstIsNull = true;                      //jesli sunburst jeszcze nie gotowy podnies flage
         }
     }
     
