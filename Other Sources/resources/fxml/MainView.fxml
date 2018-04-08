@@ -7,7 +7,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="1433.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainViewController">
     <children>
-      <TabPane layoutX="664.0" layoutY="19.0" prefHeight="658.0" prefWidth="660.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="772.0" layoutY="19.0" prefHeight="583.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Folders">
                <content>

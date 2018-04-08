@@ -90,31 +90,28 @@ public class Hasher {
             }
         }
      
-     private String hashFile(File file) {
-            final int SIZE = 4096;
-            InputStream in = null;
-            try {
-                this.messageDigest.reset();
-                in = new BufferedInputStream(new FileInputStream(file));                                                                //.getAbsolutePath()
-                byte[] buffer = new byte[SIZE];
-                while (true) {
-                    int b = in.read(buffer);
-                    if (b == -1) {
-                            break;
-                    }
-                    this.messageDigest.update(buffer);                                                                                  //, 0, buffer.length);
-                }
-            } catch (IOException e) {
-                System.out.println("IOException with file " + file.getAbsolutePath());
-            } finally {
-                Closeable closeable = in;
-                if (closeable != null) {
-                    try {closeable.close();} 
-                    catch (IOException e) {}
-                }
+    private String hashFile(File file) {
+        int bufferSize = 4096;
+        byte[] buffer = new byte[bufferSize];
+
+        InputStream in = null;
+        try {
+            in = new BufferedInputStream(new FileInputStream(file)); 
+            this.messageDigest.reset();
+            while(in.read(buffer)!=-1){
+                this.messageDigest.update(buffer);                                                                                  //, 0, buffer.length);
             }
-            return Utils.getHash(file, this.messageDigest);                                                                             //przekazuje plik i mechanizm hashujacy do narzedzia w Utils
+        } catch (IOException e) {
+            System.out.println("Wystąpił błąd z plikiem: " + file.getAbsolutePath());
+        } finally {
+            Closeable closeable = in;
+            if (closeable != null) {
+                try {closeable.close();} 
+                catch (IOException e) {}
+            }
         }
+        return Utils.getHash(file, this.messageDigest);                                                                             //przekazuje plik i mechanizm hashujacy do narzedzia w Utils
+    }
      
      public void hashujFoldery(Node node) {
 

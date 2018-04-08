@@ -31,7 +31,7 @@ public class SunburstView<T> extends Control {
 
     private final ObjectProperty<IColorStrategy> colorStrategy = new SimpleObjectProperty<>(this, "colorStrategy", new ColorStrategySectorShades());
 
-    private final ObjectProperty<Integer> maxDeepness = new SimpleObjectProperty<>(this, "maxDeepness", 8);
+    private final ObjectProperty<Integer> maxDeepness = new SimpleObjectProperty<>(this, "maxDeepness", 4);
 
 
     /***************************************************************************
@@ -61,49 +61,49 @@ public class SunburstView<T> extends Control {
     /**
      * Represents an Event which is fired when the visual has changed.
      */
-    @SuppressWarnings("serial")
-    public static class VisualChangedEvent extends Event {
-
-
-        @SuppressWarnings("rawtypes")
-        public static final EventType<VisualChangedEvent> VISUAL_CHANGED =
-                new EventType<>("VISUAL_CHANGED"); //$NON-NLS-1$
-        /**
-         * Creates a new event that can subsequently be fired.
-         */
-        public VisualChangedEvent() {
-            super(VISUAL_CHANGED);
-        }
-    }
-
-    /**
-     * Callback property when the visual has changed
-     */
-    public final ObjectProperty<EventHandler<VisualChangedEvent>> onVisualChangedProperty() {
-        return onVisualChanged;
-    }
-    public final void setOnVisualChanged(EventHandler<VisualChangedEvent> value) {
-        onVisualChangedProperty().set(value);
-    }
-    public final EventHandler<VisualChangedEvent> getOnVisualChanged() {
-        return onVisualChangedProperty().get();
-    }
-    private ObjectProperty<EventHandler<VisualChangedEvent>> onVisualChanged = new ObjectPropertyBase<EventHandler<VisualChangedEvent>>() {
-        @SuppressWarnings("rawtypes")
-        @Override protected void invalidated() {
-            eventHandlerManager.setEventHandler(VisualChangedEvent.VISUAL_CHANGED, get());
-        }
-
-        @Override
-        public Object getBean() {
-            return SunburstView.this;
-        }
-
-        @Override
-        public String getName() {
-            return "onVisualChanged"; //$NON-NLS-1$
-        }
-    };
+//    @SuppressWarnings("serial")
+//    public static class VisualChangedEvent extends Event {
+//
+//
+//        @SuppressWarnings("rawtypes")
+//        public static final EventType<VisualChangedEvent> VISUAL_CHANGED =
+//                new EventType<>("VISUAL_CHANGED"); //$NON-NLS-1$
+//        /**
+//         * Creates a new event that can subsequently be fired.
+//         */
+//        public VisualChangedEvent() {
+//            super(VISUAL_CHANGED);
+//        }
+//    }
+//
+//    /**
+//     * Callback property when the visual has changed
+//     */
+//    public final ObjectProperty<EventHandler<VisualChangedEvent>> onVisualChangedProperty() {
+//        return onVisualChanged;
+//    }
+//    public final void setOnVisualChanged(EventHandler<VisualChangedEvent> value) {
+//        onVisualChangedProperty().set(value);
+//    }
+//    public final EventHandler<VisualChangedEvent> getOnVisualChanged() {
+//        return onVisualChangedProperty().get();
+//    }
+//    private ObjectProperty<EventHandler<VisualChangedEvent>> onVisualChanged = new ObjectPropertyBase<EventHandler<VisualChangedEvent>>() {
+//        @SuppressWarnings("rawtypes")
+//        @Override protected void invalidated() {
+//            eventHandlerManager.setEventHandler(VisualChangedEvent.VISUAL_CHANGED, get());
+//        }
+//
+//        @Override
+//        public Object getBean() {
+//            return SunburstView.this;
+//        }
+//
+//        @Override
+//        public String getName() {
+//            return "onVisualChanged"; //$NON-NLS-1$
+//        }
+//    };
 
     /***************************************************************************
      *                                                                         *
@@ -188,10 +188,10 @@ public class SunburstView<T> extends Control {
     public Color getItemColor(WeightedTreeItem<T> item) {
 
         Skin<?> skin = this.getSkin();
-        //System.out.println(skin);
+
         Color color = null;
         if(skin instanceof SunburstViewSkin){
-           //System.out.println("is SunburstViewSkin");
+
            color =((SunburstViewSkin) skin).getItemColor(item);
         }
 
@@ -242,7 +242,7 @@ public class SunburstView<T> extends Control {
 
     public void refresh(){
         Skin<?> skin = this.getSkin();
-       // ((SunburstViewSkin) skin).updateSelectedItem();
+
         ((SunburstViewSkin) skin).refreshSmall();
     }
     

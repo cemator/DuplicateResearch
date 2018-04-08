@@ -142,7 +142,7 @@ public class SunburstViewShowcase extends Application {
         stage.setScene(new Scene(pane, 1080, 800));
         stage.show();
 
-      Event.fireEvent(sunburstView, new SunburstView.VisualChangedEvent());
+  //    Event.fireEvent(sunburstView, new SunburstView.VisualChangedEvent());
        
     }
 

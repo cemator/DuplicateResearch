@@ -45,6 +45,7 @@ import javafx.application.Platform;
         
 
         public SearchDuplikate(String sciezkaPliku, MainViewController fXMLDocumentController){
+         
             this.fXMLDocumentController = fXMLDocumentController; //instancja kontrolera widoku
             this.progressBarDriver = new ProgressBarDriver(fXMLDocumentController);
             this.hasher = new Hasher(progressBarDriver);
@@ -55,8 +56,8 @@ import javafx.application.Platform;
         @Override
         public void run() {
 
-            this.rootNode = treeGenerate.stworzDrzewoNodow(this.rootNode);
-            treeGenerate.ustawRodzicow(this.rootNode);
+            this.rootNode = treeGenerate.generateTreeNode(this.rootNode);
+            treeGenerate.assignParents(this.rootNode);
             
             progressBarDriver.setProgressBar(treeGenerate.getAllItems());
 

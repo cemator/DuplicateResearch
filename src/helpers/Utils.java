@@ -27,10 +27,10 @@ import java.security.MessageDigest;
             else{
                 hashOutput = String.format("%032x", new BigInteger(1,messageDigest.digest()));
             }
-            return getHashInternal(file, hashOutput);
+            return getLengthHash(file, hashOutput);
         }
 
-        private static String getHashInternal(File file, String strMd5Hash) {                                                               //zwraca stringa skladajacego sie z dlugosci pliku + hasha
+        private static String getLengthHash(File file, String strMd5Hash) {                                                               //zwraca stringa skladajacego sie z dlugosci pliku + hasha
             String strHash;
             if (file.isFile()) { //jesli plik
                 strHash = String.format("%016x%s", file.length(), strMd5Hash);

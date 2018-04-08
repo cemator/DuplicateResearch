@@ -33,14 +33,17 @@ public class SunburstRefresher implements Runnable {
         while(!isStopped){
             
             try {
-                sleep(500);} catch (InterruptedException ex) {Logger.getLogger(SunburstRefresher.class.getName()).log(Level.SEVERE, null, ex);
+                sleep(500);
+            } 
+            catch (InterruptedException ex) {
+                Logger.getLogger(SunburstRefresher.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             if(sunburstController.getMainViewController().switchesController.getSelectedBoxSelectedView().isSelected()){
 
-                Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    @Override                           //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    public void run() {                 //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    sunburstController.refreshSunburstView();}});
+                Platform.runLater(() -> {
+                    sunburstController.refreshSunburstView();
+                });
             }
         }
     }

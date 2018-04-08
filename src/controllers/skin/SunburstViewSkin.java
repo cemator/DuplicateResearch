@@ -7,8 +7,6 @@ import controllers.sunburst.DonutUnit;
 import controllers.sunburst.SunburstView;
 import controllers.sunburst.WeightedTreeItem;
 import duplicateMachine.Node;
-import javafx.event.Event;
-import javafx.scene.Group;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -20,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import controllers.sunburst.IColorStrategy;
+import javafx.scene.layout.Pane;
 
 /**
  * Skin implementation for {@link SunburstView} Control.
@@ -28,8 +27,7 @@ import controllers.sunburst.IColorStrategy;
  */
 public class SunburstViewSkin<T> extends BehaviorSkinBase<SunburstView<T>, BehaviorBase<SunburstView<T>>> {
 
-    //private final BorderPane rootLayout = new BorderPane();
-    private final Group sunburst = new Group();
+    private final Pane sunburst = new Pane();
     private final Map<WeightedTreeItem<T>, SunburstSector<T>> sectorMap = new HashMap<>();
     private final Map<WeightedTreeItem<T>, SunburstDonutUnit> donutCache = new HashMap<>();
 
@@ -67,7 +65,7 @@ public class SunburstViewSkin<T> extends BehaviorSkinBase<SunburstView<T>, Behav
 
         center = new SunburstCenter();
 
-        updateRootModel(); //potencjal
+        updateRootModel(); 
     }
 
     /***************************************************************************
@@ -253,10 +251,13 @@ public class SunburstViewSkin<T> extends BehaviorSkinBase<SunburstView<T>, Behav
         }
 
         // Fire event to notify the legend that the units are built and their colors are set.
-        Event.fireEvent(getSkinnable(), new SunburstView.VisualChangedEvent());
+ //       Event.fireEvent(getSkinnable(), new SunburstView.VisualChangedEvent());
     }
     
     public void refreshSmall(){
+        
+            
+       
         clearCurrentView();
         WeightedTreeItem<T> rootItem = getSkinnable().getRootItem();
         WeightedTreeItem<T> selectedItemRoot = getSkinnable().getSelectedItem();
@@ -288,7 +289,7 @@ public class SunburstViewSkin<T> extends BehaviorSkinBase<SunburstView<T>, Behav
         }
 
         // Fire event to notify the legend that the units are built and their colors are set.
-        Event.fireEvent(getSkinnable(), new SunburstView.VisualChangedEvent());
+//        Event.fireEvent(getSkinnable(), new SunburstView.VisualChangedEvent());
       
     }
 
@@ -519,7 +520,7 @@ public class SunburstViewSkin<T> extends BehaviorSkinBase<SunburstView<T>, Behav
         public void setCenterY(double centerY) {
             setLayoutY(centerY - getRadius());
         }
-
+        
 
         private void onAction(){
             WeightedTreeItem<?> selectedItem = getSkinnable().getSelectedItem();

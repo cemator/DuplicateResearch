@@ -234,8 +234,8 @@ public class SwitchesController implements Initializable {
         });
         
         //bindowanie suwaka
-        layerSlider.setValue(sunburstView.getMaxDeepness());
-        layerSlider.valueProperty().addListener(x -> sunburstView.setMaxDeepness((int)layerSlider.getValue()));
+        layerSlider.setValue(sunburstView.getMaxDeepness()+1);
+        layerSlider.valueProperty().addListener(x -> sunburstView.setMaxDeepness((int)layerSlider.getValue()-1));
         
         
         SelectedBoxSelectedView.selectedProperty().addListener((Observable observable)->{      

@@ -199,35 +199,35 @@ public class Node {
             this.parentNode = parentNode;
         }
         
-        public void addListeners(){
-            this.selected.addListener((Observable observable) ->{
+public void addListeners(){
+    this.selected.addListener((Observable observable) ->{
 
-                if(this.file.isDirectory()){ 
-                    if(this.selected.getValue()==true){            // w przypadku gdy zaznaczony zostaje folder,    
-                        for(Node childNode : this.getChildren()) { //zaznaczone zostają też wszystkie pliki i foldery potomne
-                            childNode.setSelected(true);
-                        }
-                    }    
-                    else{ //w przypadku gdy folder zostaje odznaczony, należy sprawdzić czy zrobił to użytkownik, 
-                          //czy folder został odznaczony z automatu, ponieważ któryś z jego potomnych został odznaczony.
-                        int iloscPlikowPotomnych = 0;
-                        int iloscPlikowZaznaczonychPotomnych = 0;
-                        for(Node childNode: this.getChildren()){
-                            iloscPlikowPotomnych++; //liczenie plików/folderów potomnych
-                            if(childNode.getSelected())
-                                iloscPlikowZaznaczonychPotomnych++; //liczenie elementów zaznaczonych
-                        }
-                        if(iloscPlikowPotomnych == iloscPlikowZaznaczonychPotomnych){  //cała zawartość folderu jest zaznaczona, co oznacza że odznaczenie
-                            for(Node childNode: this.getChildren()){                   //nie wynikało z automatu, tylko bezpośrednio przez użytkownika
-                                childNode.setSelected(false);  // w takim przypadku, gdy użytkownik odznaczył cały folder, 
-                            }                                   //wszystkie jest pliki i foldery również zostają odznaczone                    
-                        }
-                    }
+        if(this.file.isDirectory()){ 
+            if(this.selected.getValue()==true){            // w przypadku gdy zaznaczony zostaje folder,    
+                for(Node childNode : this.getChildren()) { //zaznaczone zostają też wszystkie pliki i foldery potomne
+                    childNode.setSelected(true);
                 }
+            }    
+            else{ //w przypadku gdy folder zostaje odznaczony, należy sprawdzić czy zrobił to użytkownik, 
+                  //czy folder został odznaczony z automatu, ponieważ któryś z jego potomnych został odznaczony.
+                int iloscPlikowPotomnych = 0;
+                int iloscPlikowZaznaczonychPotomnych = 0;
+                for(Node childNode: this.getChildren()){
+                    iloscPlikowPotomnych++; //liczenie plików/folderów potomnych
+                    if(childNode.getSelected())
+                        iloscPlikowZaznaczonychPotomnych++; //liczenie elementów zaznaczonych
+                }
+                if(iloscPlikowPotomnych == iloscPlikowZaznaczonychPotomnych){  //cała zawartość folderu jest zaznaczona, co oznacza że odznaczenie
+                    for(Node childNode: this.getChildren()){                   //nie wynikało z automatu, tylko bezpośrednio przez użytkownika
+                        childNode.setSelected(false);  // w takim przypadku, gdy użytkownik odznaczył cały folder, 
+                    }                                   //wszystkie jest pliki i foldery również zostają odznaczone                    
+                }
+            }
+        }
 
-                //w przypadku gdy użytkownik, wybierze wszystkie pliki z danego folderu, sam folder również powinien zostać zaznaczony
-                int iloscPlikowNaTymPoziomie = 0;
-                int iloscPlikowZaznaczonychNaTymPoziomie = 0;
+        //w przypadku gdy użytkownik, wybierze wszystkie pliki z danego folderu, sam folder również powinien zostać zaznaczony
+        int iloscPlikowNaTymPoziomie = 0;
+        int iloscPlikowZaznaczonychNaTymPoziomie = 0;
 
                 for(Node parentsChildNode: this.parentNode.getChildren()){
                     iloscPlikowNaTymPoziomie++; //liczenie ilości plików/folderó w folderze nadrzednym

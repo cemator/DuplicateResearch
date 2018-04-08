@@ -10,8 +10,8 @@
 <AnchorPane prefHeight="108.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SwitchesController">
    <children>
       <Button fx:id="selectFolderButtom" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectFolderButtomAction" text="Wybierz Folder" />
-      <Slider fx:id="zoomSlider" accessibleText="Wielkosc Wykresu" blockIncrement="0.1" layoutX="142.0" layoutY="8.0" majorTickUnit="0.5" max="3.0" min="0.1" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
-      <Slider fx:id="layerSlider" blockIncrement="1.0" layoutX="142.0" layoutY="52.0" majorTickUnit="5.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="zoomSlider" accessibleText="Wielkosc Wykresu" blockIncrement="0.1" layoutX="142.0" layoutY="8.0" majorTickUnit="0.5" max="3.0" min="0.1" minorTickCount="1" prefHeight="38.0" prefWidth="170.0" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="layerSlider" blockIncrement="1.0" layoutX="142.0" layoutY="52.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" prefHeight="38.0" prefWidth="169.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <RadioButton id="rozszerzenia" fx:id="radioRozszerzenia" layoutX="335.0" layoutY="31.0" mnemonicParsing="false" onAction="#RadioRozszerzeniaAction" text="Rozszerzenia">
          <toggleGroup>
             <ToggleGroup fx:id="ColorStrategy" />
