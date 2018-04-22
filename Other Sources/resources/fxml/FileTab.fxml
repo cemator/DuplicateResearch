@@ -6,11 +6,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FileTabController">
    <children>
-      <TableView fx:id="duplicateFileTableView" prefHeight="550.0" prefWidth="600.0">
+      <TableView fx:id="duplicateFileTableView" prefHeight="584.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="selectedFileColumn" prefWidth="48.377960324287415" sortable="false" text="Zaznacz" />
-            <TableColumn fx:id="sizeFileColumn" prefWidth="52.91335678100586" text="Rozmiar" />
-            <TableColumn fx:id="folderFileColumn" prefWidth="520.0" sortable="false" text="Ścieżka dostępu" />
+            <TableColumn fx:id="selectedFileColumn" minWidth="65.0" prefWidth="65.0" text="Zaznacz" />
+            <TableColumn fx:id="sizeFileColumn" minWidth="65.0" prefWidth="65.0" text="Rozmiar" />
+            <TableColumn fx:id="folderFileColumn" prefWidth="520.0" text="Ścieżka dostępu" />
          </columns>
       </TableView>
    </children>

@@ -3,7 +3,6 @@ package controllers.sunburst;
 import com.sun.javafx.event.EventHandlerManager;
 import controllers.skin.SunburstViewSkin;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ObjectPropertyBase;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.*;
 import javafx.scene.control.Control;

@@ -14,7 +14,7 @@ import java.util.List;
 public class ColorStrategySectorShades implements IColorStrategy{
 
     private final List<Color> sectorColors = new ArrayList<>();
-    private final double maxShades = 8;
+    private final double maxShades = 16;
 
     public ColorStrategySectorShades(){
         // We define some nice looking colors for our first few sectors

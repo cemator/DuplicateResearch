@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package duplicateMachine;
 
 import controllers.MainViewController;
@@ -29,7 +24,7 @@ public class ProgressBarDriver {
     }
     
     public void setProgressBarValue(){
-        actualItems++; System.out.println("StatusBar Value: " + actualItems);
+        actualItems++; 
         Platform.runLater(() -> {       
             fXMLDocumentController.sunburstController.SetProgressBarValue((actualItems/(allItems))*100);
         });

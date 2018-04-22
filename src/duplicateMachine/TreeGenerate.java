@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package duplicateMachine;
 
 import controllers.sunburst.WeightedTreeItem;
@@ -10,14 +5,14 @@ import java.io.File;
 
 /**
  *
- * @author Lenovo
+ * @author Seweryn
  */
 public class TreeGenerate {
     
     private double allItems = 0.0;
     
     public Node generateTreeNode(final Node node) { //tworzy strukture drzewiasta ze wszystkich plikow w badanym folderze
-            allItems++;  System.out.println("Allitems: "+allItems);
+            allItems++; 
             File plik = node.getFile();
             if (plik.isFile()) { 
                 long size = plik.length();
@@ -25,7 +20,7 @@ public class TreeGenerate {
                 return node;  // jesli  node jest plikiem a nie folderem to wychodzi tedy
             }
             
-            /////////czesc przeznaczona dla folderu \/ \/ \/
+            //czesc przeznaczona dla folderu \/
             
             for (File tempFile : plik.listFiles()) { //wywołanie rekurencyjne dla wszystkich plikow badanego folderu i dodanie ich do obecnego folderu
                 node.addChild(generateTreeNode(
@@ -52,7 +47,7 @@ public class TreeGenerate {
         if (node.getFile().isFile()){
             tempTree = new WeightedTreeItem<>( node.getSize(),node);
         }
-        else{ // node is Directory
+        else{ // node jest folderem
             tempTree = new WeightedTreeItem<>(node.getSize(),node);
             for(Node child : node.getChildren()){
                 tempTree.getChildren().add(buildTree(child));
@@ -67,8 +62,5 @@ public class TreeGenerate {
     public double getAllItems() {
         return allItems;
     }
-    
-    
-    
     
 }

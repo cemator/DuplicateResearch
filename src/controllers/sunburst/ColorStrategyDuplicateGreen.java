@@ -20,7 +20,8 @@ public class ColorStrategyDuplicateGreen implements IColorStrategy{
     @Override
     public Color colorFor(WeightedTreeItem<Node> item, int sector, int level) {
 
-        Color tempColor;// = iColorStrategy.colorFor(item,sector,level);
+        Color tempColor;
+        
         
             if(item.getValue().isDuplicate()){
                 tempColor = Color.LIMEGREEN;
@@ -32,7 +33,7 @@ public class ColorStrategyDuplicateGreen implements IColorStrategy{
         
         return tempColor;
         
-           // return Color.LIGHTYELLOW;
+         
 
     }
 
@@ -41,11 +42,5 @@ public class ColorStrategyDuplicateGreen implements IColorStrategy{
      * Private methods                                                         *
      *                                                                         *
      **************************************************************************/
-
-  
 }
-
-
-
-
 

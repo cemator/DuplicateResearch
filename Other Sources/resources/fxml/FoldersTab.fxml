@@ -3,11 +3,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView fx:id="duplicateFolderTableView" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FoldersTabController">
+<TableView fx:id="duplicateFolderTableView" prefHeight="584.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FoldersTabController">
    <columns>
-      <TableColumn fx:id="selectedFoldersColumn" prefWidth="37.0" sortable="false" text="Selected" />
-      <TableColumn fx:id="sizeFoldersColumn" prefWidth="64.0" text="Size" />
-      <TableColumn fx:id="itemsFoldersColumn" minWidth="0.0" prefWidth="36.0" sortable="false" text="Items" />
-      <TableColumn fx:id="pathFoldersColumn" prefWidth="520.0" sortable="false" text="Path" />
+      <TableColumn fx:id="selectedFoldersColumn" minWidth="65.0" prefWidth="65.0" text="Zaznacz" />
+      <TableColumn fx:id="sizeFoldersColumn" minWidth="65.0" prefWidth="65.0" text="Rozmiar" />
+      <TableColumn fx:id="itemsFoldersColumn" minWidth="65.0" prefWidth="65.0" text="Plików" />
+      <TableColumn fx:id="pathFoldersColumn" prefWidth="520.0" text="Ścieżka dostępu" />
    </columns>
 </TableView>

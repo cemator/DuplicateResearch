@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package duplicateMachine;
 
 import helpers.Utils;
@@ -25,7 +20,7 @@ import java.util.Set;
 
 /**
  *
- * @author Lenovo
+ * @author Seweryn Siedlecki
  */
 public class Hasher {
     
@@ -47,8 +42,7 @@ public class Hasher {
             }
     }
     
-     public void hashujPliki(final Node node){                              // metoda do logicznej poprawki!
-
+     public void hashujPliki(final Node node){                              
            
            File file = node.getFile();
             
@@ -71,7 +65,7 @@ public class Hasher {
                         Node cachedNode = this.mapaDlugosci.get(rozmiarPliku);//wrzuca noda o dlugosci noda ktory sie raz powtarza do noda pamieciowego pobierajac go z mapy
                             // jesli rozmiar pliku sie dubluje w mapieDlugosci to wtedy dodaje ta dlugosc do setu - na tej podstawie bedzie sprawdzana pozniej przynalreznosc innych plikow. Na podstawie tej dlugosci jest wyciagana pierwszy nod o tej dlugosci i jest hashowany  - co było wczesniej pominiete azeby nie hashowa niepotrzebnie zbyd tuzej ilosci plikow (zasobozernosc)
                             //wszystkie nastepne nody o tej samej dlugosci zostaja juz w pełni hashowane
-                            //cala struktura set jest tylko po to aby wychwycic pierwsze wystapienie drugi raz tej samej dlugosci - wtedy jst mozliwe wrocenie i zczytanie pierwszego noda o tej wielkosci i zahashowanie
+                            //cala struktura set jest tylko po to aby wychwycic pierwsze wystapienie drugi raz tej samej dlugosci - wtedy jest mozliwe wrocenie i zczytanie pierwszego noda o tej wielkosci i zahashowanie
                             String strHash = hashFile(cachedNode.getFile());
                         cachedNode.setHash(strHash);
                     }
@@ -99,7 +93,7 @@ public class Hasher {
             in = new BufferedInputStream(new FileInputStream(file)); 
             this.messageDigest.reset();
             while(in.read(buffer)!=-1){
-                this.messageDigest.update(buffer);                                                                                  //, 0, buffer.length);
+                this.messageDigest.update(buffer);                                                                                 
             }
         } catch (IOException e) {
             System.out.println("Wystąpił błąd z plikiem: " + file.getAbsolutePath());
@@ -110,7 +104,7 @@ public class Hasher {
                 catch (IOException e) {}
             }
         }
-        return Utils.getHash(file, this.messageDigest);                                                                             //przekazuje plik i mechanizm hashujacy do narzedzia w Utils
+        return Utils.getHash(file, this.messageDigest);                         //przekazuje plik i mechanizm hashujacy do narzedzia w Utils
     }
      
      public void hashujFoldery(Node node) {
@@ -131,7 +125,7 @@ public class Hasher {
                     if (child.getFile().isFile()) {
                         totalNumChildren++;
                     } else {
-                        totalNumChildren += child.getTotalChildrenCount() + 1; // children + this folder
+                        totalNumChildren += child.getTotalChildrenCount() + 1; 
                     }
                 }
 
@@ -139,7 +133,7 @@ public class Hasher {
                 node.setNumTotalChildren(totalNumChildren);
 
                 this.messageDigest.reset();
-                this.messageDigest.update("<folder>".getBytes(Charset.defaultCharset())); // folder's MD5 seed, includes illegal characters for filepaths
+                this.messageDigest.update("<folder>".getBytes(Charset.defaultCharset())); 
                 Collections.sort(sortedHashes);
                 for (String sortedHash : sortedHashes) {
                     this.messageDigest.update(sortedHash.getBytes(Charset.defaultCharset()));

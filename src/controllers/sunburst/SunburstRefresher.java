@@ -1,7 +1,3 @@
-/*se License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.sunburst;
 
 import controllers.SunburstController;
@@ -16,13 +12,10 @@ import static java.lang.Thread.sleep;
  */
 public class SunburstRefresher implements Runnable {
     
-   // SunburstView sunburstview;
+
     private SunburstController sunburstController;
     private boolean isStopped = false;
 
-    
-    
-    
     
     public SunburstRefresher(SunburstController sunburstController){
         this.sunburstController = sunburstController;
@@ -40,7 +33,6 @@ public class SunburstRefresher implements Runnable {
             }
             
             if(sunburstController.getMainViewController().switchesController.getSelectedBoxSelectedView().isSelected()){
-
                 Platform.runLater(() -> {
                     sunburstController.refreshSunburstView();
                 });

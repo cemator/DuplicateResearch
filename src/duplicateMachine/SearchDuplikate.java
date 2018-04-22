@@ -1,13 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
-
-//problem przy załadowywaniu duzych folderow -- liczenie po czasie i nie zamykanie programu po akmnieciu to puki nie skonczy liczyc
-//problem po porządkach -> nie zawsze da sie klikac select w tabelkach
-
-
- */
 package duplicateMachine;
 
 import helpers.Utils;
@@ -29,7 +19,7 @@ import javafx.application.Platform;
         
         private MainViewController fXMLDocumentController;
         private Node rootNode;
-        private Map<String, List<Node>> mapDuplicates = new HashMap<>();                          //przechowywuje mape zduplikowanych plikow (uwaga, trzyma tez pojedyncze NIE zduplikowane Nody!)
+        private Map<String, List<Node>> mapDuplicates = new HashMap<>();   //przechowywuje mape zduplikowanych plikow (uwaga, trzyma tez pojedyncze NIE zduplikowane Nody!)
 
 
         private List<Node> finalDuplicateFolderLists = new ArrayList<>();
@@ -130,18 +120,13 @@ import javafx.application.Platform;
                 }
             }
             
-        } //ta klasa ma pobrac wszystkie nody z mapy duplicatemap i dac je do jakiejs listy obiektow nod azeby moc je pokazac w tabelli
-        
-        
-        
+        }
+
         /////UPDATE VIEWERS \\\\\\
         
         private void setSunBurstVisable(){
-            Platform.runLater(new Runnable() {  //mechanizm pozwalajacy na zmiane elementow FX GUI
-                @Override                       //mechanizm pozwalajacy na zmiane elementow FX GUI
-                public void run() {             //mechanizm pozwalajacy na zmiane elementow FX GUI
-                    fXMLDocumentController.sunburstController.SetSunBurstVisable();
-                }
+            Platform.runLater(() -> {
+                fXMLDocumentController.sunburstController.SetSunBurstVisable();
             });
         }
         

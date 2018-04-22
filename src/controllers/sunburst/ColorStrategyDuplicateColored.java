@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers.sunburst;
 
 import duplicateMachine.Node;
@@ -12,10 +7,9 @@ import javafx.scene.paint.Color;
  *
  * @author Seweryn
  */
-public class ColorStrategyDuplicateColored implements IColorStrategy{ // nie dziala poprawnie
+public class ColorStrategyDuplicateColored implements IColorStrategy{ 
     
 
-   
     
     public ColorStrategyDuplicateColored(){
 
@@ -31,7 +25,7 @@ public class ColorStrategyDuplicateColored implements IColorStrategy{ // nie dzi
         if(isDuplicate){
             if(item.getValue().getFile().isFile()){
                 switch(item.getValue().getGroupFile()%10){
-                    case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
+                    case 0: { 
                         duplicateColor = Color.LIGHTBLUE;
                         break;
                     }
@@ -124,10 +118,6 @@ public class ColorStrategyDuplicateColored implements IColorStrategy{ // nie dzi
         }
         return duplicateColor;
         
-        
-        
     }
-
-
   
 }

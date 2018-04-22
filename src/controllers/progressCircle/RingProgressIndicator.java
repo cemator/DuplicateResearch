@@ -15,9 +15,12 @@
  */ 
 package controllers.progressCircle;
 
+import com.sun.javafx.css.converters.SizeConverter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 import javafx.beans.property.DoubleProperty;
 import javafx.css.CssMetaData;
@@ -27,7 +30,7 @@ import javafx.css.StyleableProperty;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 
-import com.sun.javafx.css.converters.SizeConverter;
+
 
 /**
  * Progress indicator showing a filling arc.

@@ -38,8 +38,6 @@ public class SunburstLegend extends VBox {
 
         this.setMinWidth(200);
 
-    //    sunburstView.setOnVisualChanged(x -> updateLegend());
-
         setLegendItemMax(20);
     }
 

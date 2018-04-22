@@ -3,9 +3,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="controllers.SunburstController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SunburstController">
    <children>
-      <BorderPane fx:id="pane" prefHeight="573.0" prefWidth="643.0" />
+      <BorderPane fx:id="pane" blendMode="SRC_ATOP" prefHeight="540.0" prefWidth="600.0" />
    </children>
 </AnchorPane>

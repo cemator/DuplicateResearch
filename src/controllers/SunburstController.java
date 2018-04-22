@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import controllers.sunburst.SunburstView;
@@ -15,17 +10,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import controllers.progressCircle.RingProgressIndicator;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
 
 /**
  * FXML Controller class
  *
- * @author Lenovo
+ * @author Seweryn Siedlecki
  */
 public class SunburstController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     
     MainViewController mainViewController;
     private RingProgressIndicator indicator = new RingProgressIndicator();
@@ -43,18 +38,36 @@ public class SunburstController implements Initializable {
 
     void initialize(MainViewController aThis) {
        
+        clipChildren(pane,12);
+        
         this.mainViewController = aThis;
         
         //ustalenia widoku SunBurstView
         sunburstView.setScaleX(0.7);
-        sunburstView.setScaleY(0.7); // zmianę rozmiaru przeprowadzać przy kazdym kliknieciu na podstawie wielkosci wkresu
+        sunburstView.setScaleY(0.7); 
 
 
          sunburstRefresherThread = new Thread(new SunburstRefresher(this));
-         sunburstRefresherThread.setDaemon(true); //dzieki temu apka jest zamykana razem z zakonczeniem ttego watka
+         sunburstRefresherThread.setDaemon(true); 
          sunburstRefresherThread.start();
         
     }
+    
+    static void clipChildren(Region region, double arc) {
+
+        final Rectangle outputClip = new Rectangle();
+        outputClip.setArcWidth(arc);
+        outputClip.setArcHeight(arc);
+        region.setClip(outputClip);
+
+        region.layoutBoundsProperty().addListener((ov, oldValue, newValue) -> {
+            outputClip.setWidth(newValue.getWidth());
+            outputClip.setHeight(newValue.getHeight());
+        });
+    }
+
+    
+     
     
     public void SetProgressBar(){
         
@@ -96,7 +109,7 @@ public class SunburstController implements Initializable {
             pane.setCenter(sunburstView);
         }
         else{
-            sunburstIsNull = true;                      //jesli sunburst jeszcze nie gotowy podnies flage
+            sunburstIsNull = true;                      //jesli sunburst jeszcze nie gotowy, podnies flage
         }
     }
     
@@ -104,7 +117,6 @@ public class SunburstController implements Initializable {
   
         sunburstView.refresh();
     }
-    
     
 
     public BorderPane getPane() {
@@ -118,9 +130,5 @@ public class SunburstController implements Initializable {
     public MainViewController getMainViewController() {
         return mainViewController;
     }
-    
-    
-    
-    
-    
+
 }

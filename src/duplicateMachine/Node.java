@@ -1,5 +1,3 @@
-
-
 package duplicateMachine;
 
 import java.io.File;
@@ -26,11 +24,11 @@ public class Node {
 
 	private String strHash;
         
-	private LongProperty size = new SimpleLongProperty(); //Property
-	private IntegerProperty numTotalChildren = new SimpleIntegerProperty(); //Property
-        private StringProperty path = new SimpleStringProperty(); //Property
-        private BooleanProperty selected = new SimpleBooleanProperty(false); //Property
-        private BooleanProperty duplicate = new SimpleBooleanProperty(false); //Property
+	private LongProperty size = new SimpleLongProperty(); 
+	private IntegerProperty numTotalChildren = new SimpleIntegerProperty(); 
+        private StringProperty path = new SimpleStringProperty(); 
+        private BooleanProperty selected = new SimpleBooleanProperty(false); 
+        private BooleanProperty duplicate = new SimpleBooleanProperty(false); 
         
         
         
@@ -48,12 +46,8 @@ public class Node {
 	public Node(File file) {
 		this.file = file;
 		this.children = null;
-                
                 this.path.set(file.getPath());
-       
                 addListeners();
-           
-                
 	}
         
         public Node(String ExtensionName, Boolean Extension, Long Size){ //kontruktor stworzony na potrzeby analizy rozszerzen i ich zajetosci
@@ -166,7 +160,7 @@ public class Node {
         public final ObservableValue<Boolean> selectedProperty() {
             return selected;
         }
-        public final ObservableValue<Number> sizeProperty() { //powinno byc chyba ObservableValue<Long>
+        public final ObservableValue<Number> sizeProperty() { 
             return size;
         }
         public final ObservableValue<Number> numTotalChildrenProperty() {
@@ -263,13 +257,4 @@ public void addListeners(){
         this.extensionName = extensionName;
     }
         
-        
-        
-
-        
-
-
-
-
-
 }

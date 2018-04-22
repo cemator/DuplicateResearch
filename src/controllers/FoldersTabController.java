@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import duplicateMachine.Node;
@@ -12,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -25,11 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class FoldersTabController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    
-    
+
     @FXML private TableView<Node> duplicateFolderTableView;
     @FXML private TableColumn<Node, Boolean> selectedFoldersColumn;
     @FXML private TableColumn<Node, Number> sizeFoldersColumn;
@@ -51,6 +43,7 @@ public class FoldersTabController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        duplicateFolderTableView.setPlaceholder(new Label(""));
         duplicateFolderTableView.setEditable(true);
         selectedFoldersColumn.setCellValueFactory(p -> p.getValue().selectedProperty());
         sizeFoldersColumn.setCellValueFactory(p -> p.getValue().sizeProperty());     
@@ -61,60 +54,26 @@ public class FoldersTabController implements Initializable {
         selectedFoldersColumn.setCellFactory(box.forTableColumn(selectedFoldersColumn));
         selectedFoldersColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
         
-        duplicateFolderTableView.setRowFactory(x -> new TableRow<Node>() {
+        String styles[] = new String[10];
+        styles[0] = "-fx-background-color: lightblue;";
+        styles[1] = "-fx-background-color: lightcoral;"; 
+        styles[2] = "-fx-background-color: lightcyan;"; 
+        styles[3] = "-fx-background-color: lightgoldenrodyellow;"; 
+        styles[4] = "-fx-background-color: lightgray;"; 
+        styles[5] = "-fx-background-color: lightgreen;"; 
+        styles[6] = "-fx-background-color: lightgrey;"; 
+        styles[7] = "-fx-background-color: lightpink;"; 
+        styles[8] = "-fx-background-color: lightsalmon;"; 
+        styles[9] = "-fx-background-color: lightseagreen;"; 
+        
+        duplicateFolderTableView.setRowFactory(x -> new TableRow<Node>(){
             @Override
-            public void updateItem(Node item, boolean empty) {
-                super.updateItem(item, empty) ;
+            public void updateItem(Node item, boolean empty){
+                super.updateItem(item, empty);
                 if(item != null)
-                {
-                switch(item.getGroupFolder()%10){
-                        case 0: { //else if (item.getSelected() == true) { // przy zaznaczaniu selekcji dziala z opoznienien - odswierzanie wartosci w czasie rzeczywistym szwamkuje
-                            setStyle("-fx-background-color: lightblue;"); //rgb(140,0,0);"); 
-                            break;
-                        }
-                        case 1: { 
-                            setStyle("-fx-background-color: lightcoral;"); 
-                            break;
-                        }
-                        case 2: { 
-                            setStyle("-fx-background-color: lightcyan;"); 
-                            break;
-                        }
-                        case 3: { 
-                            setStyle("-fx-background-color: lightgoldenrodyellow;"); 
-                            break;
-                        }
-                        case 4: { 
-                            setStyle("-fx-background-color: lightgray;"); 
-                            break;
-                        }
-                        case 5: { 
-                            setStyle("-fx-background-color: lightgreen;"); 
-                            break;
-                        }
-                        case 6: { 
-                            setStyle("-fx-background-color: lightgrey;"); 
-                            break;
-                        }
-                        case 7: { 
-                            setStyle("-fx-background-color: lightpink;"); 
-                            break;
-                        }
-                        case 8: { 
-                            setStyle("-fx-background-color: lightsalmon;"); 
-                            break;
-                        }
-                        case 9: {                          
-                            setStyle("-fx-background-color: lightseagreen;"); 
-                            break;
-                        }
-                    }
-                }
-                
+                    setStyle(styles[item.getGroupFolder()%10]);   
             }
         });
-        
-        
         
     }    
 

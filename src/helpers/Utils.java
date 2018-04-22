@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpers;
 
 import controllers.sunburst.WeightedTreeItem;
@@ -34,7 +29,7 @@ import java.security.MessageDigest;
             String strHash;
             if (file.isFile()) { //jesli plik
                 strHash = String.format("%016x%s", file.length(), strMd5Hash);
-                System.out.println(strHash);
+              
             } else { //jesli folder
                 final String strEmptyLength = "----------------";
                 strHash = String.format("%s%s", strEmptyLength, strMd5Hash);
@@ -80,7 +75,7 @@ import java.security.MessageDigest;
                     if(Utils.generateExtensions(nodeTemp.getFile()).equals((listaTemp.get(j-1).getExtensionName()).substring(2))){//sprawdzenie czy plik o posiada jakies piki o tym rozszerzeniu w bazie
                         obecneRozszerzenie=true; //jest obecne juz takie rozszerzenie
                         numerObiektuRoz = j-1; //oznaczenie na ktorej pozycji w listaTemp leży nasze rozszerzenie
-                        //break; // <- po znalezieniepowoduje wyjscie z petli
+                  
                     }
                 }
                 if(obecneRozszerzenie==false){ // jesli nie bylo wczesniej w tym folderze pliku o takim rozszerzeniu

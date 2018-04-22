@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 
@@ -15,6 +10,8 @@ import duplicateMachine.SearchDuplikate;
 import duplicateMachine.Node;
 import java.io.File;
 import java.io.IOException;
+import static java.lang.Math.log;
+import static java.lang.Math.log10;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,27 +39,18 @@ import javafx.stage.DirectoryChooser;
  */
 public class SwitchesController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    
+        
     @FXML private Slider zoomSlider;
     @FXML private Slider layerSlider;
     @FXML private RadioButton radioRozszerzenia;
-    
     
     @FXML private RadioButton radioShadow;
     @FXML private RadioButton radioGroupColored;
     @FXML private RadioButton radioHighContrast;
     
     @FXML private CheckBox SelectedBoxSelectedView;
-   
-    
     @FXML private ToggleGroup ColorStrategy;
-    
-  // private ColorStrategyDuplicateRed colorStrategyDuplicateRed = new ColorStrategyDuplicateRed(); // prawdopodobnie nie uzywane , po usuniecia brak zwiaz we funkcjonalnosci
-    
-    
+        
     private MainViewController mainController;
     
     @FXML private Button selectFolderButtom;
@@ -70,7 +58,6 @@ public class SwitchesController implements Initializable {
     private SunburstView sunburstView = new SunburstView();
     private SearchDuplikate badanieDuplikatow;
     private File seletedDirectory; // tutaj zostaje przypisany wybrany folder do badania
-    
     
     
     @FXML
@@ -89,14 +76,13 @@ public class SwitchesController implements Initializable {
     
      @FXML
     void deleteButtonAction(ActionEvent event) {
-        ////////// file section
+        //sekcja pliku
         final Set<Node> delFile = new HashSet<>();
 
         List<Node> pomocniczaFile = new ArrayList<>(); 
         pomocniczaFile = mainController.fileTabController.getObservableFolderList();
         
 
-        
         for(Node nod : pomocniczaFile) 
         {
            if( nod.getSelected()) {
@@ -104,7 +90,7 @@ public class SwitchesController implements Initializable {
            } 
         }
         
-        //////////folder section
+        //sekcja folderu
         
         final Set<Node> delFolder = new HashSet<>();
 
@@ -141,15 +127,14 @@ public class SwitchesController implements Initializable {
             mainController.foldersTabController.getObservableFolderList().removeAll( delFile );
             mainController.foldersTabController.getObservableFolderList().removeAll( delFolder );
             
-            ////refresh tables
+            //odświeżanie tabelek
             
-
             mainController.fileTabController.getDuplicateFolderTableView().refresh();            
             mainController.foldersTabController.getDuplicateFolderTableView().refresh();
             
             
         } else {
-            // ... user chose CANCEL or closed the dialog
+            // gdy użytkownik anuluje wybór folderu
         }
     }
      
@@ -225,17 +210,17 @@ public class SwitchesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        zoomSlider.setValue(sunburstView.getScaleX());
+        
+        //suwak zoom
+        zoomSlider.setValue(0.7); //ustalenie wartości początkowej
         zoomSlider.valueProperty().addListener(x -> {
             double scale = zoomSlider.getValue();
             sunburstView.setScaleX(scale);
             sunburstView.setScaleY(scale);
+            sunburstView.setMaxDeepness((int)(1.9/(scale*scale)));
+
         });
         
-        //bindowanie suwaka
-        layerSlider.setValue(sunburstView.getMaxDeepness()+1);
-        layerSlider.valueProperty().addListener(x -> sunburstView.setMaxDeepness((int)layerSlider.getValue()-1));
         
         
         SelectedBoxSelectedView.selectedProperty().addListener((Observable observable)->{      
@@ -248,8 +233,6 @@ public class SwitchesController implements Initializable {
                 selectedRadioButton.fire();    
             }
         });
-        
-     
 
     }    
 
@@ -272,9 +255,5 @@ public class SwitchesController implements Initializable {
         this.mainController = mainController;
                
     }
-    
-    
-    
-    
-    
+  
 }
