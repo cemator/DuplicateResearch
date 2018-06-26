@@ -9,3 +9,4 @@ The application was written in Java using the JavaFX framework.
 The Model-View-Controller pattern was used for its design.
 When presenting the data on the chart, the decorator design pattern was used.
 
+![DuplicateResearch: Main View](https://preview.ibb.co/jHC5n8/duplicateresearch.jpg)
